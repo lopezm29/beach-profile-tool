@@ -2,7 +2,7 @@
 # $ conda create --name <env> --file <this file>
 # platform: linux-64
 asn1crypto==0.24.0
-blas==1.0
+#blas==1.0
 ca-certificates==2018.03.07
 certifi==2018.10.15
 cffi==1.11.5
