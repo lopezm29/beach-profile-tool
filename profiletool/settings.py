@@ -25,7 +25,7 @@ SECRET_KEY = '*0)jb8s=mmkn!t-kz@0bb1o3=9-uix-)h)!1ym(8^okofi7+qk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.56.101', 'https://beach-profile-tool.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '192.168.56.101', 'https://beach-profile-tool.herokuapp.com']
 
 
 # Application definition
