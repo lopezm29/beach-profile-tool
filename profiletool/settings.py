@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['192.168.56.101', 'https://beach-profile-tool.herokuapp.com']
 
 INSTALLED_APPS = [
     'surveys',
-    'crispy_forms',
+    #'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
