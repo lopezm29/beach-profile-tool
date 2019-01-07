@@ -75,14 +75,25 @@ WSGI_APPLICATION = 'profiletool.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'beach_profile_tool',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306'
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'beach_profile_tool',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd7bvbivamltg9v',
+        'USER': 'njdaopmgoqimyz',
+        'PASSWORD': 'b8a5a771f72bb216a7d077edb0fd404bdad27ca67bc9aa3c2231adc237c78d8b',
+        'HOST': 'ec2-23-21-86-22.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
