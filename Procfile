@@ -1,1 +1,1 @@
-web: gunicorn beach-profile-tool.wsgi
+web: gunicorn --bind 0.0.0.0:$(PORT:-8000) profiletool.wsgi
