@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Werth Center: Beach Profile Tool</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Southern Connecticut State University</h1>
+            <hr/>
+            <h3><strong>LOGO</strong>Werth Center for Coastal and Marine Studies</h3>
+        </div>
+        <div class="col-md-12">
+            
+            <div class="navbar navbar-expand-md navbar-light bg-light">
+                <a href="#">Home</a> | 
+                <a href="#">Surveys Dropdown</a> | 
+                <a href="#">Reporting Dropdown</a>
+            </div>
+
+            <hr/>
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+        
+    </div>
+    
+</body>
+</html>

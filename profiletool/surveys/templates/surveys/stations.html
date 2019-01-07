@@ -1,0 +1,21 @@
+!<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Station</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+
+</head>
+<body>
+    <div class="container">
+        <h1>New Station</h1>
+
+        <form method="POST">
+            {{form.as_p}}
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="submit">
+        </form>
+    </div>
+</body>
+</html>

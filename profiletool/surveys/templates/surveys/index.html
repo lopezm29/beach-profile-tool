@@ -1,0 +1,13 @@
+{% extends 'surveys/wrapper.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <ul>
+            {% for survey in surveys%}
+                <li>{{survey}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

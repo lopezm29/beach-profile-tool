@@ -1,0 +1,23 @@
+{% extends 'surveys/wrapper.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <a class="btn btn-default" href="{% url 'survey_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <h2>{{survey}}</h2>
+            <p>{{survey.start}}</p>
+        </div>
+        {% for profile in profiles %}
+            <div class="row">
+                <h4>{{profile}}</h4>
+                <ul>
+                    {% for station in stations.profile.profile_id %}
+                        <li>{{station}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+
+
+    </div>
+{% endblock %}
