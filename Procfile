@@ -1,1 +1,1 @@
-web: python manage.py runserver 0.0.0.0:5000 profiletool.wsgi
+web: gunicorn profiletool.wsgi
