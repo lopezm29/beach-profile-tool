@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,14 +26,14 @@ SECRET_KEY = '*0)jb8s=mmkn!t-kz@0bb1o3=9-uix-)h)!1ym(8^okofi7+qk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.56.101', 'https://beach-profile-tool.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '192.168.56.101', 'https://beach-profile-tool.herokuapp.com/']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'surveys',
-    'crispy_forms',
+    #'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,14 +76,25 @@ WSGI_APPLICATION = 'profiletool.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'beach_profile_tool',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306'
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'beach_profile_tool',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd7bvbivamltg9v',
+        'USER': 'njdaopmgoqimyz',
+        'PASSWORD': 'b8a5a771f72bb216a7d077edb0fd404bdad27ca67bc9aa3c2231adc237c78d8b',
+        'HOST': 'ec2-23-21-86-22.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
@@ -124,3 +136,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+django_heroku.settings(locals())
