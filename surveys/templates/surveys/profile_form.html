@@ -11,7 +11,7 @@
 	<div class="col-md-12">
 		<form method="post">
 			{%csrf_token%}
-			{{form|crispy}}
+			{{form.as_p}}
 			<br/>
 			<input type="submit" value="Submit Changes" class="btn btn-secondary">
 			<h5>*denotes required field</h5>
