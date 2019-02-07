@@ -69,7 +69,7 @@ def survey_edit(request, pk):
 def survey_details(request, pk):
     survey = get_object_or_404(Survey, instance_id=pk)
 
-    profiles = get_list_or_404(Profile, survey_instance=survey.instance_id)
+    profiles = get_list_or_404(Profile, survey_instance=pk)
 
     stations = []
     for profile in profiles:
