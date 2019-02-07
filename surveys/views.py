@@ -78,7 +78,7 @@ def survey_details(request, pk):
         #get_list_or_404(Station, profile_id=profile.profile_id)
         stations.append(station_list)
 
-    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
+    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations, 'pk':pk})
 
 
 def survey_calc(request, pk):
