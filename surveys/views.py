@@ -67,9 +67,9 @@ def survey_edit(request, pk):
     return render(request, 'surveys/surveys.html', {'form':form})
 
 def survey_details(request, pk):
-    survey = get_object_or_404(Survey, instance_id=self.kwargs.get('pk'))
+    survey = get_object_or_404(Survey, instance_id=pk)
 
-    profiles = Profile.objects.filter(survey_instance=self.kwargs.get('pk'))
+    profiles = Profile.objects.filter(survey_instance=pk)
     #get_list_or_404(Profile, survey_instance=pk)
 
     stations = []
