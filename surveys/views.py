@@ -66,19 +66,27 @@ def survey_edit(request, pk):
 
     return render(request, 'surveys/surveys.html', {'form':form})
 
-def survey_details(request, pk):
-    survey = get_object_or_404(Survey, instance_id=pk)
+def survey_details(request, pk=None):
+    
+    if pk:
+        survey = get_object_or_404(Survey, instance_id=pk)
 
-    profiles = Profile.objects.filter(survey_instance=pk)
-    #get_list_or_404(Profile, survey_instance=pk)
+        profiles = Profile.objects.filter(survey_instance=pk)
+        #get_list_or_404(Profile, survey_instance=pk)
 
-    stations = []
-    for profile in profiles:
-        station_list = Station.objects.filter(profile_id=profile.profile_id)
-        #get_list_or_404(Station, profile_id=profile.profile_id)
-        stations.append(station_list)
+        stations = []
+        for profile in profiles:
+            station_list = Station.objects.filter(profile_id=profile.profile_id)
+            #get_list_or_404(Station, profile_id=profile.profile_id)
+            stations.append(station_list)
 
-    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations, 'pk':pk})
+    if profiles.count() > 0:
+        if stations.count() > 0:
+            return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
+        else:
+            return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'statoins':[]})
+    else:
+        return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':[], 'statoins':[]})
 
 
 def survey_calc(request, pk):
