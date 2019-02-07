@@ -66,7 +66,7 @@ def survey_edit(request, pk):
 
     return render(request, 'surveys/surveys.html', {'form':form})
 
-def survey_details(request, pk=None):
+def survey_details(request, pk):
     
     if pk:
         survey = get_object_or_404(Survey, instance_id=pk)
