@@ -7,8 +7,8 @@ urlpatterns=[
     path('profiles/add', views.profile, name="profiles"),
     path('surveys/add', views.survey, name="surveys"),
     path('surveys/view/<int:pk>', views.survey_details, name='survey_details'),
-    path('surveys/edit<int:instance_id>', views.survey_edit, name='survey_edit'),
-    path('surveys/calc/<int:instance_id>', views.survey_calc, name='survey_calc'),
+    path('surveys/edit<int:pk>', views.survey_edit, name='survey_edit'),
+    path('surveys/calc/<int:pk>', views.survey_calc, name='survey_calc'),
     #path('stations/', StationView.as_view()), #Edit View
     #path('stations/add', StationCreate.as_view()), #Form Made
     #path('stations/edit', StationUpdate.as_view()),
