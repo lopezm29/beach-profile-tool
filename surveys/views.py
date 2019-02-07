@@ -69,11 +69,13 @@ def survey_edit(request, pk):
 def survey_details(request, pk):
     survey = get_object_or_404(Survey, instance_id=pk)
 
-    profiles = get_list_or_404(Profile, survey_instance=pk)
+    profiles = Profile.objects.filter(survey_instance=pk)
+    #get_list_or_404(Profile, survey_instance=pk)
 
     stations = []
     for profile in profiles:
-        station_list = get_list_or_404(Station, profile_id=profile.profile_id)
+        station_list = Station.objects.filter(profile_id=profile.profile_id)
+        #get_list_or_404(Station, profile_id=profile.profile_id)
         stations.append(station_list)
 
     return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
