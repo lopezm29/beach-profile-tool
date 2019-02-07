@@ -80,8 +80,8 @@ def survey_details(request, pk=None):
             #get_list_or_404(Station, profile_id=profile.profile_id)
             stations.append(station_list)
 
-    if profiles.count() > 0:
-        if stations.count() > 0:
+    if len(profiles) > 0:
+        if len(stations) > 0:
             return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
         else:
             return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'statoins':[]})
