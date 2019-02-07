@@ -5,7 +5,7 @@
     <div class="row">
         <ul>
             {% for survey in surveys%}
-                <li>{{survey}}: <a href="{% url 'survey_details' survey.pk %}"> Edit </a></li>
+                <li>{{survey}}: <a href="{% url 'survey_details' pk=survey.instance_id %}"> Edit </a></li>
             {% endfor %}
         </ul>
     </div>
