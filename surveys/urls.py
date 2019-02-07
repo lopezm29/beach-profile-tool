@@ -4,7 +4,7 @@ from surveys.views import *
 
 urlpatterns=[
     path('stations/add', views.station, name="stations"),
-    path('profiles/add/', views.profile, name="profiles"),
+    path('profiles/add', views.profile, name="profiles"),
     path('surveys/add', views.survey, name="surveys"),
     path('surveys/<int:pk>/view/', views.survey_details, name='survey_details'),
     path('surveys/<int:instance_id>/edit/', views.survey_edit, name='survey_edit'),
