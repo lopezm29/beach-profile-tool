@@ -5,9 +5,17 @@
     <div class="row">
         <ul>
             {% for survey in surveys%}
-                <li>{{survey}}: <a href="{% url 'survey_details' pk=survey.instance_id %}"> Edit </a></li>
+                <li>
+                    {{survey}}: 
+                    <form  method="POST" action="{% url 'survey_details' %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Edit"/>
+                            <input type="hidden" name="pk" value="{{survey.instance_id}}">
+                    </form>
+                </li>
             {% endfor %}
         </ul>
     </div>
 
+    
 {% endblock %}

@@ -51,8 +51,8 @@ def survey(request):
 
     return render(request, 'surveys/surveys.html', {'form':form})
 
-def survey_edit(request, pk):
-    survey = get_object_or_404(Survey, instance_id=pk)
+def survey_edit(request, request.POST['pk']):
+    survey = get_object_or_404(Survey, instance_id=request.POST['pk'])
 
     if "POST" == request.method:
         form = SurveyCreate(request.POST, instance=survey)
@@ -60,19 +60,19 @@ def survey_edit(request, pk):
         if form.is_valid():
             survey = form.save(commit=False)
             survey.save()
-            return redirect('survey_detail', pk=pk)
+            return redirect('survey_detail', request.POST['pk']=request.POST['pk'])
         else:
             print('ERROR: Form invalid')
 
     return render(request, 'surveys/surveys.html', {'form':form})
 
-def survey_details(request, pk):
+def survey_details(request):
     
-    if pk:
-        survey = get_object_or_404(Survey, instance_id=pk)
+    if request.POST['pk']:
+        survey = get_object_or_404(Survey, instance_id=request.POST['pk'])
 
-        profiles = Profile.objects.filter(survey_instance=pk)
-        #get_list_or_404(Profile, survey_instance=pk)
+        profiles = Profile.objects.filter(survey_instance=request.POST['pk'])
+        #get_list_or_404(Profile, survey_instance=request.POST['pk'])
 
         stations = []
         for profile in profiles:
@@ -89,7 +89,7 @@ def survey_details(request, pk):
         return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':[], 'statoins':[]})
 
 
-def survey_calc(request, pk):
+def survey_calc(request, request.POST['pk']):
     pass
 
 def profile(request):
