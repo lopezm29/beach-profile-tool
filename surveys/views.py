@@ -11,7 +11,7 @@ def index(request):
     
     if 'POST' == request.method:
         pk = request.POST.get('pk')
-        return survey_details(request, pk)
+        return survey_details(request, pk=pk)
     
     return render(request, 'surveys/index.html', {'surveys':surveys})
 
