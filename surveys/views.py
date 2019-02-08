@@ -8,7 +8,17 @@ from django.shortcuts import get_list_or_404, get_object_or_404, redirect
 # Create your views here.
 def index(request):
     surveys = Survey.objects.order_by('instance_id')
-    return render(request, 'surveys/index.html', {'surveys':surveys})
+    forms = []
+    
+    for survey in surveys:
+        form = PostFormP(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.pk = survey.instance_id
+            post.save()
+            forms.append(form)
+    
+    return render(request, 'surveys/index.html', {'surveys':surveys, 'forms':forms})
 
 # class StationView(ListView):
 #     model = Station
