@@ -51,7 +51,7 @@ def survey(request):
 
     return render(request, 'surveys/surveys.html', {'form':form})
 
-def survey_edit(request, request.POST['pk']):
+def survey_edit(request):
     survey = get_object_or_404(Survey, instance_id=request.POST['pk'])
 
     if "POST" == request.method:
@@ -89,7 +89,7 @@ def survey_details(request):
         return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':[], 'statoins':[]})
 
 
-def survey_calc(request, request.POST['pk']):
+def survey_calc(request):
     pass
 
 def profile(request):
