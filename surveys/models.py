@@ -28,10 +28,10 @@ class Profile(models.Model):
 
 class Station(models.Model):
     station_id = models.AutoField(primary_key=True)
-    profile = models.ForeignKey(Profile, blank=False, on_delete=models.PROTECT)
+    profile = models.ForeignKey(Profile, blank=True, on_delete=models.PROTECT)
     number = models.IntegerField(max_length=None, blank=True, null=True)
-    distance = models.DecimalField(decimal_places=3, max_digits=6, blank=True, null=True)
-    z = models.DecimalField(decimal_places=3, max_digits=6, blank=True, null=True)
+    distance = models.DecimalField(decimal_places=3, max_digits=6, blank=False, null=True)
+    z = models.DecimalField(decimal_places=3, max_digits=6, blank=False, null=True)
 
     comment = models.CharField(max_length=200, blank=True, null=True)
 

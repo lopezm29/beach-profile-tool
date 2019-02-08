@@ -6,11 +6,9 @@
 	<div class="col-md-12">
 		<form method="post">
 			{%csrf_token%}
-			{% for i in num_stations %}
-                <input>
-            {% endfor %}
+			{{form.as_p}}
 			<br/>
-			<input type="submit" value="Submit" class="btn btn-secondary">
+			<input type="submit" value="Submit" class="btn btn-success">
 			<h5>*denotes required field</h5>
 		</form>
 	</div>
