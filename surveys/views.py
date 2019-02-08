@@ -8,13 +8,11 @@ from django.shortcuts import get_list_or_404, get_object_or_404, redirect
 # Create your views here.
 def index(request):
     surveys = Survey.objects.order_by('instance_id')
-    forms = []
     
-    for survey in surveys:
-        if request.method == 'POST':
-            return survey_details(request, pk=request.POST['pk'])
+    if request.method == 'POST':
+        return survey_details(request, pk=request.POST['pk'])
     
-    #return render(request, 'surveys/index.html', {'surveys':surveys, 'forms':forms})
+    return render(request, 'surveys/index.html', {'surveys':surveys})
 
 # class StationView(ListView):
 #     model = Station
