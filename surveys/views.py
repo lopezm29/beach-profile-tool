@@ -10,7 +10,8 @@ def index(request):
     surveys = Survey.objects.order_by('instance_id')
     
     if 'POST' == request.method:
-        return survey_details(request, request.POST['pk'])
+        pk = request.POST['pk']
+        return survey_details(request, pk)
     
     return render(request, 'surveys/index.html', {'surveys':surveys})
 
