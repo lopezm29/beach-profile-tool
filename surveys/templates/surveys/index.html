@@ -4,16 +4,14 @@
 
     <div class="row">
         <ul>
-            {% for survey, form in surveys, forms %}
+            {% for survey in surveys%}
                 <li>
-                    {{survey}}: {{form}}
-<!--
+                    {{survey}}: 
                     <form  method="POST" action="{% url 'survey_details' %}">
                             {% csrf_token %}
                             <input type="submit" value="Edit"/>
                             <input type="hidden" name="pk" value="{{survey.instance_id}}">
                     </form>
--->
                 </li>
             {% endfor %}
         </ul>

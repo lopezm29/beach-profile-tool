@@ -13,10 +13,8 @@ def index(request):
     for survey in surveys:
         form = PostFormP(request.POST, instance=post)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.pk = survey.instance_id
-            post.save()
-            forms.append(form)
+            if request.method == 'POST':
+                return survey_details(request, pk=request.POST['pk'])
     
     return render(request, 'surveys/index.html', {'surveys':surveys, 'forms':forms})
 
