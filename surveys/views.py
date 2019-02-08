@@ -10,8 +10,7 @@ def index(request):
     surveys = Survey.objects.order_by('instance_id')
     
     if 'POST' == request.method:
-        pk = request.POST.get('pk')
-        return survey_details(request, pk=pk)
+        return survey_details(request)
     
     return render(request, 'surveys/index.html', {'surveys':surveys})
 
@@ -71,8 +70,8 @@ def survey_edit(request):
 
     return render(request, 'surveys/surveys.html', {'form':form})
 
-def survey_details(request, pk):
-    survey = get_object_or_404(Survey, instance_id=pk)
+def survey_details(request):
+    survey = get_object_or_404(Survey, instance_id=request.POST.get('pk'))
     profile = []
     stations = []
 
