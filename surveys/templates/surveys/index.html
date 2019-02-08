@@ -9,7 +9,7 @@
                     {{survey}}: 
                     <form  method="POST" action="{% url 'survey_details' %}">
                             {% csrf_token %}
-                            <input type="submit" value="Edit"/>
+                            <input type="submit" value="Edit" class="btn btn-warning"/>
                             <input type="hidden" name="pk" value="{{survey.instance_id}}">
                     </form>
                 </li>
