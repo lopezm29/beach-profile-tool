@@ -9,8 +9,8 @@ from django.shortcuts import get_list_or_404, get_object_or_404, redirect
 def index(request):
     surveys = Survey.objects.order_by('instance_id')
     
-    if request.method == 'POST':
-        return survey_details(request, pk=request.POST['pk'])
+    if 'POST' == request.method:
+        return survey_details(request, request.POST['pk'])
     
     return render(request, 'surveys/index.html', {'surveys':surveys})
 
@@ -70,7 +70,8 @@ def survey_edit(request):
 
     return render(request, 'surveys/surveys.html', {'form':form})
 
-def survey_details(request, pk):
+def survey_details(request, pk=None):
+    pk = request.POST['pk']
     survey = get_object_or_404(Survey, pk)
     profile = []
     stations = []
