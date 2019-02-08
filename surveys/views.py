@@ -72,16 +72,17 @@ def survey_details(request):
     stations = []
     if request.POST['pk']:
         survey = get_object_or_404(Survey, instance_id=request.POST['pk'])
-
-        profiles = Profile.objects.filter(survey_instance=request.POST['pk'])
-        #get_list_or_404(Profile, survey_instance=request.POST['pk'])
-
-        for profile in profiles:
-            station_list = Station.objects.filter(profile_id=profile.profile_id)
-            #get_list_or_404(Station, profile_id=profile.profile_id)
-            stations.append(station_list)
-            
-    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
+        
+    return render(request, 'surveys/survey_details.html', {'survey':survey})
+#        profiles = Profile.objects.filter(survey_instance=request.POST['pk'])
+#        #get_list_or_404(Profile, survey_instance=request.POST['pk'])
+#
+#        for profile in profiles:
+#            station_list = Station.objects.filter(profile_id=profile.profile_id)
+#            #get_list_or_404(Station, profile_id=profile.profile_id)
+#            stations.append(station_list)
+#            
+#    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
 
 
 def survey_calc(request):
