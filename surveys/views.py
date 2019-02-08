@@ -28,6 +28,45 @@ def survey(request):
 
     return render(request, 'surveys/surveys.html', {'form':form})
 
+def profile(request):
+    form = ProfileCreate()
+    profiles = get_list_or_404(Survey, survey_instance_id=request.POST.get('pk'))
+
+    if "POST" == request.method:
+        form = ProfileCreate(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            
+            request.POST['index'] = 0
+            request.POST['profile_pk'] = form.profile_id
+
+            return station(request)
+        else:
+            print('ERROR: Form invalid')
+
+    return render(request, 'surveys/profiles.html', {'form':form, 'profiles':profiles})
+
+def station(request):
+    index = request.POST.get('index')
+    num_stations = request.POST.get('number_of_stations')
+    
+    if "POST" == request.method:
+        form = StationCreate(request.POST)
+            
+        if form.is_valid():
+            form.save(commit=False)
+            form.profile = request.POST.get('profile_pk')
+            form.save()
+        else:
+            print('ERROR: Form invalid')
+        
+        if index < num_stations:
+            request.POST['index'] = request.POST.get('index') + 1
+            return station(request)
+    
+    return render(request, 'surveys/stations.html', {'form':form})
+
 def survey_edit(request):
     survey = get_object_or_404(Survey, instance_id=request.POST['pk'])
 
@@ -64,40 +103,12 @@ def survey_details(request):
 def survey_calc(request):
     pass
 
-def profile(request):
-    form = ProfileCreate()
-    profiles = get_list_or_404(Survey, survey_instance_id=request.POST.get('pk'))
-
-    if "POST" == request.method:
-        form = ProfileCreate(request.POST)
-
-        if form.is_valid():
-            form.save(commit=True)
-            
-            request.POST['index'] = 0
-
-            return station(request)
-        else:
-            print('ERROR: Form invalid')
-
-    return render(request, 'surveys/profiles.html', {'form':form, 'profiles':profiles})
-
 def profileStationsEdit(request, stations):
     forms = []
     for station in stations:
         forms.append(get_object_or_404(Station, station_id=station.station_id))
 
     return render(request, 'surveys/profile_stations_edit.html', {'forms':forms})
-
-def station(request):
-    index = request.POST.get('index')
-    num_stations = request.POST.get('number_of_stations')
-    stations = []
-    
-    return 
-        
-
-    return render(request, 'surveys/stations.html', {'form':form})
 
 def station_edit(request, profile_id):
     pass
