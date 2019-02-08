@@ -70,8 +70,7 @@ def survey_edit(request):
 
     return render(request, 'surveys/surveys.html', {'form':form})
 
-def survey_details(request, pk=None):
-    pk = request.POST['pk']
+def survey_details(request, pk):
     survey = get_object_or_404(Survey, instance_id=pk)
     profile = []
     stations = []
