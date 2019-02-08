@@ -11,12 +11,10 @@ def index(request):
     forms = []
     
     for survey in surveys:
-        form = PostFormP(request.POST, instance=post)
-        if form.is_valid():
-            if request.method == 'POST':
-                return survey_details(request, pk=request.POST['pk'])
+        if request.method == 'POST':
+            return survey_details(request, pk=request.POST['pk'])
     
-    return render(request, 'surveys/index.html', {'surveys':surveys, 'forms':forms})
+    #return render(request, 'surveys/index.html', {'surveys':surveys, 'forms':forms})
 
 # class StationView(ListView):
 #     model = Station
