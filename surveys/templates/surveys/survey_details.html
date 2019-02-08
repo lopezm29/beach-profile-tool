@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <a class="btn btn-default" href="{% url 'survey_details' pk=survey.instance_id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a class="btn btn-default" href="{% url 'survey_details' pk=survey.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
             <h2>{{survey}}</h2>
             <p>{{survey.start}}</p>
         </div>
