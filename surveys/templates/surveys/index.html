@@ -7,7 +7,7 @@
             {% for survey in surveys%}
                 <li>
                     {{survey}}: 
-                    <form  method="POST" action="{% url 'survey_details' %}">
+                    <form  method="POST" action="{% url 'survey_details' pk=survey.instance_id%}">
                             {% csrf_token %}
                             <input type="submit" value="Edit"/>
                             <input type="hidden" name="pk" value="{{survey.instance_id}}">

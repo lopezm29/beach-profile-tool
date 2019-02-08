@@ -6,7 +6,7 @@ urlpatterns=[
     path('stations/add', views.station, name="stations"),
     path('profiles/add', views.profile, name="profiles"),
     path('surveys/add', views.survey, name="surveys"),
-    path('surveys/view/$', views.survey_details, name='survey_details'),
+    path('surveys/view/<int:pk>', views.survey_details, name='survey_details'),
     path('surveys/edit/', views.survey_edit, name='survey_edit'),
     path('surveys/calc/', views.survey_calc, name='survey_calc'),
     #path('stations/', StationView.as_view()), #Edit View
