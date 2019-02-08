@@ -72,7 +72,7 @@ def survey_edit(request):
 
 def survey_details(request, pk=None):
     pk = request.POST['pk']
-    survey = get_object_or_404(Survey, pk)
+    survey = get_object_or_404(Survey, instance_id=pk)
     profile = []
     stations = []
 
