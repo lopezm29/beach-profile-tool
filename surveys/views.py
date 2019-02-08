@@ -14,33 +14,6 @@ def index(request):
     
     return render(request, 'surveys/index.html', {'surveys':surveys})
 
-# class StationView(ListView):
-#     model = Station
-
-# class SurveyCreate(CreateView):
-#     model = Survey
-#     fields = ['beach_name', 'start', 'mhhw', 'mllw']
-
-# class SurveyUpdate(UpdateView):
-#     model = Survey
-#     fields = ['beach_name', 'start', 'mhhw', 'mllw']
-
-# class ProfileCreate(CreateView):
-#     model = Profile
-#     fields = ['survey_instance', 'section', 'number', 'start_of_profile', 'elevation_control']
-
-# class ProfileUpdate(UpdateView):
-#     model = Profile
-#     fields = ['survey_instance', 'section', 'number', 'start_of_profile', 'elevation_control']
-
-# class StationCreate(CreateView):
-#     model = Station
-#     fields = ['profile', 'number', 'northing', 'easting', 'elevation', 'comments']
-
-# class StationUpdate(UpdateView):
-#     model = Station
-#     fields = ['profile', 'number', 'northing', 'easting', 'elevation', 'comments', 'distance', 'x', 'y', 'z']
-
 def survey(request):
     form = SurveyCreate()
 
@@ -93,28 +66,21 @@ def survey_calc(request):
 
 def profile(request):
     form = ProfileCreate()
+    profiles = get_list_or_404(Survey, survey_instance_id=request.POST.get('pk'))
 
     if "POST" == request.method:
         form = ProfileCreate(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
+            
+            request.POST['index'] = 0
 
-            profile = Profile.objects.latest('profile_id')
-            stations = []
-            for x in range(profile.number_of_stations):
-                station = StationCreate(request.POST)
-                if station.is_valid():
-                    station.save(commit=True)
-                    stations.append(station)
-                else:
-                    print('ERROR: Form invalid')
-
-            return profileStationsEdit(request, stations)
+            return station(request)
         else:
             print('ERROR: Form invalid')
 
-    return render(request, 'surveys/profiles.html', {'form':form})
+    return render(request, 'surveys/profiles.html', {'form':form, 'profiles':profiles})
 
 def profileStationsEdit(request, stations):
     forms = []
@@ -123,20 +89,13 @@ def profileStationsEdit(request, stations):
 
     return render(request, 'surveys/profile_stations_edit.html', {'forms':forms})
 
-def station(request, num_stations):
-
+def station(request):
+    index = request.POST.get('index')
+    num_stations = request.POST.get('number_of_stations')
     stations = []
-    for i in range(num_stations):
-        stations.append(StationCreate(request.POST))
-
-    if "POST" == request.method:
-        form = StationCreate(request.POST)
-
-        if form.is_valid():
-            form.save(commit=True)
-            return index(request)
-        else:
-            print('ERROR: Form invalid')
+    
+    return 
+        
 
     return render(request, 'surveys/stations.html', {'form':form})
 

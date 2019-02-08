@@ -7,6 +7,15 @@
 		<h2>Profile Form</h2>
 	</div>
 </div>
+
+{% for profile in profiles 0%}
+<div class="row bg-light">
+	<div class="col-md-12">
+		<h2>{{profile}}</h2>
+	</div>
+</div>
+{% endfor %}
+
 <div class="row">
 	<div class="col-md-12">
 		<form method="post">

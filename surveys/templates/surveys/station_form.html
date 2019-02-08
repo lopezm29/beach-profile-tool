@@ -1,16 +1,16 @@
 {% extends 'surveys/wrapper.html' %}
 
-
-
 {% block content %}
 
 <div class="row">
 	<div class="col-md-12">
 		<form method="post">
 			{%csrf_token%}
-			{{form.as_p}}
+			{% for i in num_stations %}
+                <input>
+            {% endfor %}
 			<br/>
-			<input type="submit" value="Submit Changes" class="btn btn-secondary">
+			<input type="submit" value="Submit" class="btn btn-secondary">
 			<h5>*denotes required field</h5>
 		</form>
 	</div>
