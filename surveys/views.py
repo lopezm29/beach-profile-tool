@@ -71,9 +71,8 @@ def survey_details(request, pk):
     profile = []
     stations = []
 
-    if request.POST['pk']:
-          
     return render(request, 'surveys/survey_details.html', {'survey':survey})
+#   if request.POST['pk']:
 #        profiles = Profile.objects.filter(survey_instance=request.POST['pk'])
 #        #get_list_or_404(Profile, survey_instance=request.POST['pk'])
 #
