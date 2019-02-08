@@ -67,7 +67,7 @@ def survey_edit(request):
     return render(request, 'surveys/surveys.html', {'form':form})
 
 def survey_details(request):
-    survey = None:
+    survey = None
     profile = []
     stations = []
     if request.POST['pk']:
