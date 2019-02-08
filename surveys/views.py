@@ -60,7 +60,7 @@ def survey_edit(request):
         if form.is_valid():
             survey = form.save(commit=False)
             survey.save()
-            return redirect('survey_detail', request.POST['pk']=request.POST['pk'])
+            return redirect('survey_detail')
         else:
             print('ERROR: Form invalid')
 
@@ -84,9 +84,9 @@ def survey_details(request):
         if len(stations) > 0:
             return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
         else:
-            return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'statoins':[]})
+            return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':[]})
     else:
-        return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':[], 'statoins':[]})
+        return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':[], 'stations':[]})
 
 
 def survey_calc(request):
