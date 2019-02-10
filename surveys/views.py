@@ -48,11 +48,12 @@ def profile(request):
 
     return render(request, 'surveys/profiles.html', {'form':form, 'profiles':profiles})
 
-def station(request):
-    index = request.POST.get('index')
+def station(request, index=0):
+    
     num_stations = request.POST.get('number_of_stations')
     
     if "POST" == request.method:
+        i = index
         form = StationCreate(request.POST)
             
         if form.is_valid():
@@ -63,8 +64,8 @@ def station(request):
             print('ERROR: Form invalid')
         
         if index < num_stations:
-            request.POST['index'] = request.POST.get('index') + 1
-            return station(request)
+            i = i + 1
+            return station(request, i)
     
     return render(request, 'surveys/stations.html', {'form':form})
 
