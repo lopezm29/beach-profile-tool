@@ -86,10 +86,10 @@ def survey_edit(request):
 
 def survey_details(request):
     survey = get_object_or_404(Survey, instance_id=request.POST.get('pk'))
-    profile = []
+    profiles = Profile.objects.filter(survey_instance_id=request.POST.get('pk'))
     stations = []
 
-    return render(request, 'surveys/survey_details.html', {'survey':survey})
+    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
 #   if request.POST['pk']:
 #        profiles = Profile.objects.filter(survey_instance=request.POST['pk'])
 #        #get_list_or_404(Profile, survey_instance=request.POST['pk'])

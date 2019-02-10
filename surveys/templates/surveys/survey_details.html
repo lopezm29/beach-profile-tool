@@ -4,21 +4,28 @@
     <div class="container-fluid">
         
         <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <h2>{{survey}}</h2>             
+                </div>
+                <div class="row">
+                    
+                    <p>Started: {{survey.start}}</p>
+                            
+                </div>
+            </div>
             
-            <h2>{{survey}}</h2>
-            
+            <div class="col-md-4">
+                <form  method="POST" action="{% url 'profiles' %}">
+                    {% csrf_token %}
+                    <input type="submit" value="Add Profile" class="btn btn-primary"/>
+                    <input type="hidden" name="pk" value="{{survey.instance_id}}">
+                </form>
+            </div>
         </div>
         
-        <div class="row">
-            
-            <p>Started: {{survey.start}}</p>
-            
-        </div>
-        <form  method="POST" action="{% url 'profiles' %}">
-            {% csrf_token %}
-            <input type="submit" value="Add Profile" class="btn btn-primary"/>
-            <input type="hidden" name="pk" value="{{survey.instance_id}}">
-        </form>
+        
+        
         {% for profile in profiles %}
             <div class="row">
                 
@@ -39,14 +46,12 @@
                 </div>
                 
                 <div class="col-md-6">
-                    <ul>
-                        <li>
-                            <form  method="POST" action="{% url 'stations' %}">
-                                {% csrf_token %}
-                                <input type="submit" value="Add Station" class="btn btn-warning"/>
-                                <input type="hidden" name="pk" value="{{survey.instance_id}}">
-                            </form>
-                        </li>
+                    <form  method="POST" action="{% url 'stations' %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Add Station" class="btn btn-seccondary"/>
+                        <input type="hidden" name="pk" value="{{survey.instance_id}}">
+                    </form>
+                    <ul>    
                         {% for station in stations.profile.profile_id %}
                             <li>{{station}}</li>
                         {% endfor %}
