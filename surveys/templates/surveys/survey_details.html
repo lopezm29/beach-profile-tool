@@ -14,7 +14,11 @@
             <p>Started: {{survey.start}}</p>
             
         </div>
-        
+        <form  method="POST" action="{% url 'profiles' %}">
+            {% csrf_token %}
+            <input type="submit" value="Add Profile" class="btn btn-primary"/>
+            <input type="hidden" name="pk" value="{{survey.instance_id}}">
+        </form>
         {% for profile in profiles %}
             <div class="row">
                 
@@ -36,6 +40,13 @@
                 
                 <div class="col-md-6">
                     <ul>
+                        <li>
+                            <form  method="POST" action="{% url 'stations' %}">
+                                {% csrf_token %}
+                                <input type="submit" value="Add Station" class="btn btn-warning"/>
+                                <input type="hidden" name="pk" value="{{survey.instance_id}}">
+                            </form>
+                        </li>
                         {% for station in stations.profile.profile_id %}
                             <li>{{station}}</li>
                         {% endfor %}
