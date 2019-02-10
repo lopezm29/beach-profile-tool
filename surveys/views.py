@@ -30,7 +30,8 @@ def survey(request):
 
 def profile(request):
     form = ProfileCreate()
-    profiles = get_list_or_404(Survey, survey_instance_id=request.POST.get('pk'))
+    profiles = Profile.objects.filter(survey_instance=request.POST['pk'])
+    #get_list_or_404(Survey, survey_instance_id=request.POST.get('pk'))
 
     if "POST" == request.method:
         form = ProfileCreate(request.POST)
