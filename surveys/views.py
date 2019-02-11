@@ -49,7 +49,7 @@ def profile(request):
 
 def station(request, index=0):
     
-    num_stations = request.POST.get('number_of_stations')
+    num_stations = int(request.POST.get('number_of_stations'))
     
     if "POST" == request.method:
         i = index
@@ -65,6 +65,8 @@ def station(request, index=0):
         if index < num_stations:
             i = i + 1
             return station(request, i)
+        else:
+            return survey_details(request)
     
     return render(request, 'surveys/stations.html', {'form':form})
 
