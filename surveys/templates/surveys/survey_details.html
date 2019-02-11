@@ -49,6 +49,7 @@
                     <form  method="POST" action="{% url 'stations' %}">
                         {% csrf_token %}
                         <input type="submit" value="Add Station" class="btn btn-seccondary"/>
+                        <input type="hidden" name="number_of_stations" value="1">
                         <input type="hidden" name="pk" value="{{survey.instance_id}}">
                     </form>
                     <ul>    
