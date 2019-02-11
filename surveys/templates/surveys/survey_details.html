@@ -36,14 +36,14 @@
                     </div>
                     
                     <div class="row">
-                        <form method="POST" <!-- action="{% url 'profiles_edit' %}" --> >
+                        <form method="POST">
                             {% csrf_token %}
                             <input type="submit" value="Edit Profile" class="btn btn-warning">
                         </form>
                     </div>
                     
                     <div class="row">
-                        <form method="POST" <!-- action="{% url 'profiles_delete' %}" --> >
+                        <form method="POST">
                             {% csrf_token %}
                             <input type="submit" value="Delete Profile" class="btn btn-danger">
                         </form>
