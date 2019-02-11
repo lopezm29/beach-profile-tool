@@ -29,27 +29,33 @@
         {% for profile in profiles %}
             <div class="row">
                 
-                <div class="col-md-6">
+                <div class="col-md-3">
                     
                     <div class="row">
                         <h4>{{profile}}</h4>
                     </div>
                     
                     <div class="row">
-                        <h4>
-                            <form>
-                                <input type="submit" value="Edit profile" class="btn btn-warning">
-                            </form>
-                        </h4>
+                        <form method="POST" action="{% url 'profiles_edit' %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Edit Profile" class="btn btn-warning">
+                        </form>
+                    </div>
+                    
+                    <div class="row">
+                        <form method="POST" action="{% url 'profiles_delete' %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Delete Profile" class="btn btn-danger">
+                        </form>
                     </div>
                     
                 </div>
                 
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <form  method="POST" action="{% url 'stations' %}">
                         {% csrf_token %}
                         <input type="submit" value="Add Station" class="btn btn-seccondary"/>
-                        <input type="hidden" name="number_of_stations" value="1">
+                        <input type="hidden" name="number_of_stations" value="0">
                         <input type="hidden" name="profile_pk" value="{{profile.profile_id}}">
                         <input type="hidden" name="pk" value="{{survey.instance_id}}">
                     </form>
