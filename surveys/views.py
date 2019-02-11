@@ -39,7 +39,6 @@ def profile(request):
         if form.is_valid():
             form.save(commit=True)
             
-            request.POST['index'] = 0
             request.POST['profile_pk'] = form.profile_id
 
             return station(request)
