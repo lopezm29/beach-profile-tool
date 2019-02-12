@@ -50,8 +50,8 @@ def profile(request):
 
     return render(request, 'surveys/profiles.html', {'form':form, 'pk':pk, 'profiles':profiles, 'profile_pk':latest_profile_pk})
 
-def station(request, index=0, ):
-    
+def station(request, index=0):
+    form = StationCreate()
     num_stations = int(request.POST.get('number_of_stations'))
     stations = Station.objects.filter(profile_id=request.POST.get('profile_pk'))
     
