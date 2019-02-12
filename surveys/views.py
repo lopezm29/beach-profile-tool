@@ -39,6 +39,7 @@ def profile(request):
         if form.is_valid():
             form.save(commit=True)
             
+            profile = Profile.objects.order_by('profile_id')[0]
             request.POST['profile_pk'] = form.profile_id
 
             return station(request)
@@ -50,7 +51,7 @@ def profile(request):
 def station(request, index=0):
     
     num_stations = int(request.POST.get('number_of_stations'))
-    stations = Station.objects.filter(profile_id=request.POST.get())
+    stations = Station.objects.filter(profile_id=request.POST.get('profile_pk'))
     
     if "POST" == request.method:
         i = index
