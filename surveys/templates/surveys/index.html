@@ -4,31 +4,31 @@
     <table>
         <div class="row">
             <tr>
-                <th>Instance</th>
-                <th>State Date</th>
-                <th></th>
-                <th></th>
+                <th class="border-left">Instance</th>
+                <th class="border-left">State Date</th>
+                <th class="border-left"></th>
+                <th class="border-left"></th>
             </tr>
         </div>
         {% for survey in surveys%}
-        <div class="row border-top">
-            <tr>
-                <td>
+        <div class="row">
+            <tr class="border-top">
+                <td class="border-left">
                     <h4>{{survey}}</h4>
                 </td>
-                <td>
+                <td class="border-left">
                     <div class="date">
                         {{survey.start}}
                     </div>
                 </td>
-                <td>
+                <td class="border-left">
                     <form  method="POST" action="{% url 'survey_details' %}">
                         {% csrf_token %}
                         <input type="submit" value="View Details" class="btn btn-success"/>
                         <input type="hidden" name="pk" value="{{survey.instance_id}}">
                     </form> 
                 </td>
-                <td>
+                <td class="border-left">
                     <form method="POST" action="{% url 'survey_confirm' %}">
                         {% csrf_token %}
                     <input type="submit" value="Delete" class="btn btn-danger">

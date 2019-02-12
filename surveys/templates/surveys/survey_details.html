@@ -31,11 +31,11 @@
             <div class="col-md-9">
                 <table>
                     <tr>
-                        <th>#</th>
-                        <th>Distance</th>
-                        <th>Elevation</th>
-                        <th>#</th>
-                        <th>#</th>
+                        <th class="border-left">#</th>
+                        <th class="border-left">Distance</th>
+                        <th class="border-left">Elevation</th>
+                        <th class="border-left">#</th>
+                        <th class="border-left">#</th>
                     </tr>
                 </table>
             </div>
@@ -58,7 +58,7 @@
                     </div>
                     
                     <div class="row">
-                        <form method="POST" action="{% ult 'profile_confirm'%}">
+                        <form method="POST" action="{% url 'profile_confirm'%}">
                             {% csrf_token %}
                             <input type="submit" value="Delete Profile" class="btn btn-danger">
                             <input type="hidden" name="pk" value="{{profile.profile_id}}">
@@ -76,6 +76,7 @@
                         <input type="hidden" name="pk" value="{{survey.instance_id}}">
                     </form>
                     <table>
+                        <!-- REMEMBER Create table to view station information -->
                         {% for station in stations.profile.profile_id %}
                             <li>{{station}}</li>
                         {% endfor %}
