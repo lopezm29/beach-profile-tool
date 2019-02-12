@@ -47,7 +47,7 @@ def profile(request):
         else:
             print('ERROR: Form invalid')
 
-    return render(request, 'surveys/profiles.html', {'form':form, 'profiles':profiles, 'profile_pk':latest_profile_pk})
+    return render(request, 'surveys/profiles.html', {'form':form, 'pk':pk, 'profiles':profiles, 'profile_pk':latest_profile_pk})
 
 def station(request, index=0, ):
     
