@@ -7,10 +7,10 @@
 
             <li>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-10">
                             <h3>{{survey}}</h3> 
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <form  method="POST" action="{% url 'survey_details' %}">
                             {% csrf_token %}
                             <input type="submit" value="View Details" class="btn btn-success"/>
