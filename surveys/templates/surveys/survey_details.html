@@ -54,7 +54,7 @@
                 <div class="col-md-9">
                     <form  method="POST" action="{% url 'stations' %}">
                         {% csrf_token %}
-                        <input type="submit" value="Add Station" class="btn btn-seccondary"/>
+                        <input type="submit" value="Add Station" class="btn btn-success"/>
                         <input type="hidden" name="number_of_stations" value="0">
                         <input type="hidden" name="profile_pk" value="{{profile.profile_id}}">
                         <input type="hidden" name="pk" value="{{survey.instance_id}}">
