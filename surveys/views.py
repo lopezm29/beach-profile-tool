@@ -30,7 +30,8 @@ def survey(request):
 
 def profile(request):
     form = ProfileCreate()
-    profiles = Profile.objects.filter(survey_instance=request.POST.get('pk'))
+    pk = request.POST.get('pk')
+    profiles = Profile.objects.filter(survey_instance=pk)
     latest_profile_pk = profiles.order_by('profile_id')[0].profile_id
     #get_list_or_404(Survey, survey_instance_id=request.POST.get('pk'))
 
