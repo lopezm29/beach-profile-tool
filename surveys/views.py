@@ -40,7 +40,7 @@ def profile(request):
             form.save(commit=True)
             
             profile = Profile.objects.order_by('profile_id')[0]
-            request.POST['profile_pk'] = form.profile_id
+            request.POST['profile_pk'] = profile.profile_id
 
             return station(request)
         else:
