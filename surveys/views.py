@@ -106,6 +106,34 @@ def survey_details(request):
 #            
 #    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
 
+def survey_confirm((request, confirmed=None):
+    survey = get_object_or_404(Survey, instance_id=request.POST.get('pk'))
+    
+    if "POST" == request.method and confirmed:
+        return delete(request, confirmed_object=survey)
+    
+    return survey_confirm(request, {'survey':survey, 'pk':survey.instance_id})
+
+def profile_confirm(request, confirmed=False):
+    profile = get_object_or_404(Profile, profile_id=request.POST.get('pk'))
+
+    if "POST" == request.method and confirmed:
+        return delete(request, confirmed_object=profile)
+
+    return profile_confirm(request, {'profile':profile, 'pk':profile.profile_id})
+
+def station_confirm(request, confirmed=False):
+    station = get_object_or_404(Station, station_id=request.POST.get('pk'))
+
+    if "POST" == request.method and confirmed:
+        return delete(request, confirmed_object=station)
+
+    return station_confirm(request, {'station':station, 'pk':station.station_id})
+
+def delete(request, confirmed_object):
+    confirmed_object.delete()
+    return HttpResponse('deleted')
+
 
 def survey_calc(request):
     pass
