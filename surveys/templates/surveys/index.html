@@ -10,34 +10,33 @@
                 <th></th>
             </tr>
         </div>
-    <ul>
-    {% for survey in surveys%}
+        {% for survey in surveys%}
         <div class="row border-top">
             <tr>
-                <td><h4>{{survey}}</h4></td>
-            </tr>
-            <tr>
-                <div class="date"></div>
-                    {{survey.start}}
-            </tr>
-            <tr>
-                <form  method="POST" action="{% url 'survey_details' %}">
-                    {% csrf_token %}
-                    <input type="submit" value="View Details" class="btn btn-success"/>
-                    <input type="hidden" name="pk" value="{{survey.instance_id}}">
-                </form> 
-            </tr>
-            <tr>
-                <form method="POST" action="{% url 'survey_confirm' %}">
-                    {% csrf_token %}
+                <td>
+                    <h4>{{survey}}</h4>
+                </td>
+                <td>
+                    <div class="date">
+                        {{survey.start}}
+                    </div>
+                </td>
+                <td>
+                    <form  method="POST" action="{% url 'survey_details' %}">
+                        {% csrf_token %}
+                        <input type="submit" value="View Details" class="btn btn-success"/>
+                        <input type="hidden" name="pk" value="{{survey.instance_id}}">
+                    </form> 
+                </td>
+                <td>
+                    <form method="POST" action="{% u 'survey_confirm' %}">
+                        {% csrf_token %}
                     <input type="submit" value="Delete" class="btn btn-danger">
-                    <input type="hidden" name="pk" value="{{profile.profile_id}}">
-                </form>
+                        <input type="hidden" name="pk" value="{{profile.profile_id}}">
+                    </form>
+                </td>
             </tr>
-    
         </div>
     {% endfor %}
-
-    </ul>
     </table>
 {% endblock %}
