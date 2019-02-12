@@ -28,7 +28,7 @@
                 </form> 
             </tr>
             <tr>
-                <form method="POST" action="{% ult 'survey_confirm' %}">
+                <form method="POST" action="{% url 'survey_confirm' %}">
                     {% csrf_token %}
                     <input type="submit" value="Delete" class="btn btn-danger">
                     <input type="hidden" name="pk" value="{{profile.profile_id}}">
