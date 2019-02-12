@@ -11,7 +11,7 @@ class Survey(models.Model):
     mllw = models.DecimalField(decimal_places=3, max_digits=6)
 
     def __str__(self):
-        return str(self.instance_id) + " - " + self.beach_name + " " + str(self.start)
+        return str(self.instance_id) + " - " + self.beach_name
 
 class Profile(models.Model):
     profile_id = models.AutoField(primary_key=True)
