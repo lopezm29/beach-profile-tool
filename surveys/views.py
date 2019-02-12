@@ -31,7 +31,7 @@ def survey(request):
 def profile(request):
     form = ProfileCreate()
     profiles = Profile.objects.filter(survey_instance=request.POST.get('pk'))
-    latest_profile_pk = profiles.order_by('profile_id')[0] + 1
+    latest_profile_pk = profiles.order_by('profile_id')[0].profile_id + 1
     #get_list_or_404(Survey, survey_instance_id=request.POST.get('pk'))
 
     if "POST" == request.method:
