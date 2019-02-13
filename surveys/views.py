@@ -106,26 +106,26 @@ def survey_details(request):
 #            
 #    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
 
-def survey_confirm(request, confirmed=False):
+def survey_confirm(request):
     survey = get_object_or_404(Survey, instance_id=request.POST.get('pk'))
     
-    if "POST" == request.method and confirmed:
+    if "POST" == request.method and "True" == request.POST.get('confirmed'):
         return delete(request, confirmed_object=survey)
     
     return survey_confirm(request, {'survey':survey, 'pk':survey.instance_id})
 
-def profile_confirm(request, confirmed=False):
+def profile_confirm(request):
     profile = get_object_or_404(Profile, profile_id=request.POST.get('pk'))
 
-    if "POST" == request.method and confirmed:
+    if "POST" == request.method and "True" == request.POST.get('confirmed'):
         return delete(request, confirmed_object=profile)
 
     return profile_confirm(request, {'profile':profile, 'pk':profile.profile_id})
 
-def station_confirm(request, confirmed=False):
+def station_confirm(request):
     station = get_object_or_404(Station, station_id=request.POST.get('pk'))
 
-    if "POST" == request.method and confirmed:
+    if "POST" == request.method and "True" == request.POST.get('confirmed'):
         return delete(request, confirmed_object=station)
 
     return station_confirm(request, {'station':station, 'pk':station.station_id})
