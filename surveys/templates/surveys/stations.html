@@ -17,7 +17,11 @@
         <form method="POST">
             {% csrf_token %}
             {% for field in form%}
-                <div class="form-group">{{field.label_tag}} {{field}}</div>
+                {% if "Profile" == field.label_tag %}
+                    <div class="form-group">{{field.label_tag}} {{field.value|default_if_none:request.POST.get('profile_pk')}}</div>
+                {% else %}
+                    <div class="form-group">{{field.label_tag}} {{field}}</div>
+                {% endif %}
             {% endfor %}
             <input type="submit" class="btn btn-primary" value="submit">
         </form>
