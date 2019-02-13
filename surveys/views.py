@@ -68,7 +68,7 @@ def station(request, index=0):
         
         if index < num_stations:
             i = i + 1
-            return station(request, i)
+            return render(request, i)
         else:
             return survey_details(request)
     
