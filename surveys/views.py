@@ -112,7 +112,7 @@ def survey_confirm(request):
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         return delete(request, confirmed_object=survey)
     
-    return survey_confirm(request, {'survey':survey, 'pk':survey.instance_id})
+    return render(request, {'survey':survey, 'pk':survey.instance_id})
 
 def profile_confirm(request):
     profile = get_object_or_404(Profile, profile_id=request.POST.get('pk'))
@@ -120,7 +120,7 @@ def profile_confirm(request):
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         return delete(request, confirmed_object=profile)
 
-    return profile_confirm(request, {'profile':profile, 'pk':profile.profile_id})
+    return render(request, {'profile':profile, 'pk':profile.profile_id})
 
 def station_confirm(request):
     station = get_object_or_404(Station, station_id=request.POST.get('pk'))
@@ -128,7 +128,7 @@ def station_confirm(request):
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         return delete(request, confirmed_object=station)
 
-    return station_confirm(request, {'station':station, 'pk':station.station_id})
+    return render(request, {'station':station, 'pk':station.station_id})
 
 def delete(request, confirmed_object):
     confirmed_object.delete()
