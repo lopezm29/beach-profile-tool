@@ -106,7 +106,7 @@ def survey_details(request):
 #            
 #    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
 
-def survey_confirm(request, confirmed=None):
+def survey_confirm(request, confirmed=False):
     survey = get_object_or_404(Survey, instance_id=request.POST.get('pk'))
     
     if "POST" == request.method and confirmed:
