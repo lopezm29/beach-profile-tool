@@ -55,22 +55,22 @@ def station(request, index=0):
     num_stations = int(request.POST.get('number_of_stations'))
     stations = Station.objects.filter(profile_id=request.POST.get('profile_pk'))
     
-    if "POST" == request.method:
-        i = index
-        form = StationCreate(request.POST)
-            
-        if form.is_valid():
-            form.save(commit=False)
-            form.profile = request.POST.get('profile_pk')
-            form.save()
-        else:
-            print('ERROR: Form invalid')
-        
-        if index < num_stations:
-            i = i + 1
-            return render(request, i)
-        else:
-            return survey_details(request)
+#    if "POST" == request.method:
+#        i = index
+#        form = StationCreate(request.POST)
+#            
+#        if form.is_valid():
+#            form.save(commit=False)
+#            form.profile = request.POST.get('profile_pk')
+#            form.save()
+#        else:
+#            print('ERROR: Form invalid')
+#        
+#        if index < num_stations:
+#            i = i + 1
+#            return render(request, i)
+#        else:
+#            return survey_details(request)
     
     return render(request, 'surveys/stations.html', {'form':form, 'stations':stations})
 
