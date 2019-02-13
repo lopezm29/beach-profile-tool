@@ -1,9 +1,10 @@
-<a href="{{% url 'index.html' %}}" class="btn btn-success">No</a>
+<a href="{{request.POST.next}}" class="btn btn-success">No</a>
 
 {% block content %}
     <form>
         {% csrf_token %}
         <input type="submit" value="Yes" class="btn btn-danger"/>
         <input type="hidden" name="pk" value="{{pk}}"/>
+        <input type="hidden" name="next" value="{{ request.next }}">
     </form>
 {% endblock %}

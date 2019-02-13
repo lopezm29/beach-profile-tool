@@ -132,7 +132,7 @@ def station_confirm(request, confirmed=False):
 
 def delete(request, confirmed_object):
     confirmed_object.delete()
-    return HttpResponse('deleted')
+    return redirect(request.POST.get('next'))
 
 
 def survey_calc(request):
