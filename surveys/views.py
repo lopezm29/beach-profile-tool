@@ -100,7 +100,7 @@ def survey_details(request):
 
     for profile in profiles:
         pair = []
-        list_of_stations = Station.objects.filter(profile_id=profile.profile_id).order_by('number', 'ASC')
+        list_of_stations = Station.objects.filter(profile_id=profile.profile_id).order_by('number')
         pair.append(profile)
         pair.append(list_of_stations)
         profiles_stations_pair.append(pair)
