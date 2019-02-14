@@ -81,11 +81,13 @@
                                 <td class="border-left border-top">{{station.comment}}</td>
                                 <td class="border-left border-top">
                                     <form method="POST">
+                                        {% csrf_token %}
                                         <input type="submit" value="//edit//" class="btn btn-warning">
                                     </form>
                                 </td>
                                 <td class="border-left border-top">
-                                    <form method="POST">
+                                    <form method="POST" action="{% url 'station_confirm' %}">
+                                        {% csrf_token %}
                                         <input type="submit" value="//delete//" class="btn btn-danger">
                                         <input type="hidden" name="pk" value="{{station.station_id}}">
                                         <input type="hidden" name="next" value="{{ request.path }}">
