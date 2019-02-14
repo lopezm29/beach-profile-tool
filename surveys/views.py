@@ -135,15 +135,14 @@ def survey_delete(request):
 def profile_delete(request):
     profile = get_object_or_404(Profile, profile_id=request.POST.get('pk'))
     pk = profile.pk
+    next_url = request.POST.get('next')
+    next_pk = request.POST.get('next_pk')
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         confirmed_object.delete()
-        next_url = request.POST.get('next')
-        next_pk = request.POST.get('next_pk')
         return render(request, next_url, {'pk':next_pk})
+    
     elif "POST" == request.method and "False" == request.POST.get('confirmed'):
-        next_url = request.POST.get('next')
-        next_pk = request.POST.get('next_pk')
         return render(request, next_url, {'pk':next_pk})
 
     return render(request, 'surveys/profile_delete.html', {'profile':profile, 'pk':pk})
