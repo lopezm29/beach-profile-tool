@@ -146,7 +146,7 @@ def profile_delete(request):
         profile = get_object_or_404(Profile, profile_id=profile_pk)
         profile.delete()
         
-        return survey_detalis(request)
+        return survey_details(request)
     
     profile = get_object_or_404(Profile, profile_id=profile_pk)
 
