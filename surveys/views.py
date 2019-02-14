@@ -103,7 +103,7 @@ def survey_details(request):
         list_of_stations = Station.objects.filter(profile_id=profile.profile_id)
         pair.append(profile)
         pair.append(list_of_stations)
-        profiles_staions_pair.append(pair)
+        profiles_stations_pair.append(pair)
 
     return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
 #   if request.POST['pk']:
