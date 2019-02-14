@@ -53,6 +53,7 @@ def profile(request):
 def station(request, index=0):
     form = StationCreate()
     # num_stations = int(request.POST.get('number_of_stations'))
+    pk = request.POST.get('pk')
     profile = Profile.objects.filter(profile_id=request.POST.get('profile_pk'))
     stations = Station.objects.filter(profile_id=request.POST.get('profile_pk'))
     
@@ -75,7 +76,7 @@ def station(request, index=0):
 #        else:
 #            return survey_details(request)
     
-    return render(request, 'surveys/stations.html', {'form':form, 'profile':profile, 'stations':stations})
+    return render(request, 'surveys/stations.html', {'form':form, 'pk':pk, 'profile':profile, 'stations':stations})
 
 def survey_edit(request):
     survey = get_object_or_404(Survey, instance_id=request.POST['pk'])
