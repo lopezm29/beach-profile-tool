@@ -1,4 +1,11 @@
 <a href="{{request.POST.next}}" class="btn btn-success">No</a>
+<form>
+    {% csrf_token %}
+    <input type="submit" value="No" class="btn btn-success"/>
+    <input type="hidden" name="next" value="{{ request.next }}">
+    <input type="hidden" name="next_pk" value="{{survey.instance_id}}">
+    <input type="hidden" name="deleted" value="False">
+</form>
 &nbsp&nbsp&nbsp&nbsp
 <form>
     {% csrf_token %}
