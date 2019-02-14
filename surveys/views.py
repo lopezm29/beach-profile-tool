@@ -95,14 +95,17 @@ def survey_edit(request):
 
 def survey_details(request):
     survey = get_object_or_404(Survey, instance_id=request.POST.get('pk'))
-    profiles = Profile.objects.filter(survey_instance_id=request.POST.get('pk'))
+    profiles = Profile.objects.filter(survey_instance_id=request.POST.get('pk')).order_by('section')
     profiles_stations_pair = []
 
     for profile in profiles:
         pair = []
+        
         list_of_stations = Station.objects.filter(profile_id=profile.profile_id).order_by('number')
+        
         pair.append(profile)
         pair.append(list_of_stations)
+        
         profiles_stations_pair.append(pair)
 
     return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
@@ -153,6 +156,7 @@ def profile_delete(request):
 
 def station_delete(request):
     station_pk = request.POST.get('station_pk')
+    print(station_pk)
     station = get_object_or_404(Station, station_id=station_pk)
     
     next_url = request.POST.get('next')
