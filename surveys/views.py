@@ -122,11 +122,11 @@ def survey_delete(request):
     
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         confirmed_object.delete()
-        next_url = str(request.POST.get('next')) + '.html'
+        next_url = request.POST.get('next')
         next_pk = request.POST.get('next_pk')
         return render(request, next_url, {'pk':next_pk})
     elif "POST" == request.method and "False" == request.POST.get('confirmed'):
-        next_url = str(request.POST.get('next')) + '.html'
+        next_url = request.POST.get('next')
         next_pk = request.POST.get('next_pk')
         return render(request, next_url, {'pk':next_pk})
     
@@ -138,11 +138,11 @@ def profile_delete(request):
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         confirmed_object.delete()
-        next_url = str(request.POST.get('next')) + '.html'
+        next_url = request.POST.get('next')
         next_pk = request.POST.get('next_pk')
         return render(request, next_url, {'pk':next_pk})
     elif "POST" == request.method and "False" == request.POST.get('confirmed'):
-        next_url = str(request.POST.get('next')) + '.html'
+        next_url = request.POST.get('next')
         next_pk = request.POST.get('next_pk')
         return render(request, next_url, {'pk':next_pk})
 
@@ -153,11 +153,11 @@ def station_delete(request):
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         confirmed_object.delete()
-        next_url = str(request.POST.get('next')) + '.html'
+        next_url = request.POST.get('next')
         next_pk = request.POST.get('next_pk')
         return render(request, next_url, {'pk':next_pk})
     elif "POST" == request.method and "False" == request.POST.get('confirmed'):
-        next_url = str(request.POST.get('next')) + '.html'
+        next_url = request.POST.get('next')
         next_pk = request.POST.get('next_pk')
         return render(request, next_url, {'pk':next_pk})
 
