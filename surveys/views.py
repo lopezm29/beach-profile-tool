@@ -142,9 +142,14 @@ def station_confirm(request):
     return render(request, {'station':station, 'pk':station.station_id})
 
 def delete(request, confirmed_object):
-    confirmed_object.delete()
-    return redirect(request.POST.get('next'))
+    pk = request.POST.get('pk')
 
+    if "POST" == request.method and "True" == request.POST.get('confirmed'):
+        return delete(request, confirmed_object=station)
+        confirmed_object.delete()
+        return redirect(request.POST.get('next'))
+
+    return render(request, {'pk':pk})
 
 def survey_calc(request):
     pass
