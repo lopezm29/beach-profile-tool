@@ -121,7 +121,14 @@ def survey_delete(request):
     survey = get_object_or_404(Survey, instance_id=request.POST.get('pk'))
     
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
-        return delete(request, confirmed_object=survey)
+        confirmed_object.delete()
+        next_url = str(request.POST.get('next')) + '.html'
+        next_pk = request.POST.get('next_pk')
+        return render(request, next_url, {'pk':next_pk})
+    elif "POST" == request.method and "False" == request.POST.get('confirmed'):
+        next_url = str(request.POST.get('next')) + '.html'
+        next_pk = request.POST.get('next_pk')
+        return render(request, next_url, {'pk':next_pk})
     
     return render(request, 'surveys/survey_delete.html')
 
@@ -130,7 +137,14 @@ def profile_delete(request):
     pk = profile.pk
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
-        return delete(request, confirmed_object=profile)
+        confirmed_object.delete()
+        next_url = str(request.POST.get('next')) + '.html'
+        next_pk = request.POST.get('next_pk')
+        return render(request, next_url, {'pk':next_pk})
+    elif "POST" == request.method and "False" == request.POST.get('confirmed'):
+        next_url = str(request.POST.get('next')) + '.html'
+        next_pk = request.POST.get('next_pk')
+        return render(request, next_url, {'pk':next_pk})
 
     return render(request, 'surveys/profile_delete.html', {'profile':profile, 'pk':pk})
 
@@ -138,7 +152,14 @@ def station_delete(request):
     station = get_object_or_404(Station, station_id=request.POST.get('pk'))
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
-        return delete(request, confirmed_object=station)
+        confirmed_object.delete()
+        next_url = str(request.POST.get('next')) + '.html'
+        next_pk = request.POST.get('next_pk')
+        return render(request, next_url, {'pk':next_pk})
+    elif "POST" == request.method and "False" == request.POST.get('confirmed'):
+        next_url = str(request.POST.get('next')) + '.html'
+        next_pk = request.POST.get('next_pk')
+        return render(request, next_url, {'pk':next_pk})
 
     return render(request, 'surveys/station_delete.html')
 
