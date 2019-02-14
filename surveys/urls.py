@@ -9,9 +9,9 @@ urlpatterns=[
     path('surveys/view', views.survey_details, name='survey_details'),
     path('surveys/edit', views.survey_edit, name='survey_edit'),
     path('surveys/calc', views.survey_calc, name='survey_calc'),
-    path('surveys/confirm', views.survey_confirm, name='survey_confirm'),
-    path('surveys/confirm', views.profile_confirm, name='profile_confirm'),
-    path('surveys/confirm', views.station_confirm, name='station_confirm'),
+    path('surveys/confirm/survey_delete', views.survey_confirm, name='survey_confirm'),
+    path('profiles/confirm/profile_delete', views.profile_confirm, name='profile_confirm'),
+    path('surveys/confirm/station_delete', views.station_confirm, name='station_confirm'),
     path('delete', views.delete, name='delete'),
     #path('stations/', StationView.as_view()), #Edit View
     #path('stations/add', StationCreate.as_view()), #Form Made
