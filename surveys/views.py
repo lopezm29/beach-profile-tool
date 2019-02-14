@@ -96,9 +96,13 @@ def survey_edit(request):
 def survey_details(request):
     survey = get_object_or_404(Survey, instance_id=request.POST.get('pk'))
     profiles = Profile.objects.filter(survey_instance_id=request.POST.get('pk'))
-    stations = []
+    stations_2d = []
 
-    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
+    for profile in profiles:
+        list_of_stations = Station.objects.filter(profile_id=profile.profile_id)
+        stations_2d.append(list_of_stations)
+
+    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations_2d':stations_2d})
 #   if request.POST['pk']:
 #        profiles = Profile.objects.filter(survey_instance=request.POST['pk'])
 #        #get_list_or_404(Profile, survey_instance=request.POST['pk'])

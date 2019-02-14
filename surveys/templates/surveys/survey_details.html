@@ -37,11 +37,11 @@
                         <th class="border-left">#</th>
                         <th class="border-left">#</th>
                     </tr>
-                </table>
+                <!-- </table> -->
             </div>
         </div>
         
-        {% for profile in profiles %}
+        {% for profile, station_list in profiles, stations_2d %}
             <div class="row border-top">
                 
                 <div class="col-md-3">
@@ -77,11 +77,23 @@
                         <input type="hidden" name="profile_pk" value="{{profile.profile_id}}">
                         <input type="hidden" name="pk" value="{{survey.instance_id}}">
                     </form>
-                    <table>
+                    <!-- <table> -->
                         <!-- REMEMBER Create table to view station information -->
-                        {% for station in stations.profile.profile_id %}
-                            <li>{{station}}</li>
-                        {% endfor %}
+                        <tr>
+                            <td>{{station.station_number}}</td>
+                            <td>{{station.distance}}</td>
+                            <td>{{station.z}}</td>
+                            <td>
+                                <form method="POST">
+                                    <input type="submit" value="//edit//" class="btn btn-warning">
+                                </form>
+                            </td>
+                            <td>
+                                <form method="POST">
+                                    <input type="submit" value="//delete//" class="btn btn-warning">
+                                </form>
+                            </td>
+                        </tr>
                     </table>
                 </div>
                 
