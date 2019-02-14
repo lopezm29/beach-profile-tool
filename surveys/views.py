@@ -127,11 +127,12 @@ def survey_confirm(request):
 
 def profile_confirm(request):
     profile = get_object_or_404(Profile, profile_id=request.POST.get('pk'))
+    pk = profile.pk
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         return delete(request, confirmed_object=profile)
 
-    return render(request, {'profile':profile, 'pk':profile.profile_id})
+    return render(request, {'profile':profile, 'pk':pk})
 
 def station_confirm(request):
     station = get_object_or_404(Station, station_id=request.POST.get('pk'))
