@@ -147,11 +147,13 @@ def delete(request, confirmed_object):
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         confirmed_object.delete()
+        next_url = str(request.POST.get('next')) + '.html'
         next_pk = request.POST.get('next_pk')
-        return render(request, request.POST.get('next'), {'pk':next_pk})
+        return render(request, next_url, {'pk':next_pk})
     elif "POST" == request.method and "False" == request.POST.get('confirmed'):
+        next_url = str(request.POST.get('next')) + '.html'
         next_pk = request.POST.get('next_pk')
-        return render(request, request.POST.get('next'), {'pk':next_pk})
+        return render(request, next_url, {'pk':next_pk})
 
     return render(request, {'pk':pk})
 
