@@ -41,13 +41,13 @@
             </div>
         </div>
         
-        {% for profile, station_list in profiles, stations_2d %}
+        {% for pair in profiles_stations_pair %}
             <div class="row border-top">
                 
                 <div class="col-md-3">
                     
                     <div class="row">
-                        <h4>{{profile}}</h4>
+                        <h4>{{pair.0}}</h4>
                     </div>
                     
                     <div class="row">
@@ -61,7 +61,7 @@
                         <form method="POST" action="{% url 'profile_confirm' %}">
                             {% csrf_token %}
                             <input type="submit" value="Delete Profile" class="btn btn-danger">
-                            <input type="hidden" name="pk" value="{{profile.profile_id}}">
+                            <input type="hidden" name="pk" value="{{pair.0.profile_id}}">
                             <input type="hidden" name="next" value="{{ request.path }}">
                             <input type="hidden" name="confirmed" value="False">
                         </form>
@@ -74,11 +74,12 @@
                         {% csrf_token %}
                         <input type="submit" value="Add Station" class="btn btn-info"/>
                         <input type="hidden" name="number_of_stations" value="0">
-                        <input type="hidden" name="profile_pk" value="{{profile.profile_id}}">
+                        <input type="hidden" name="profile_pk" value="{{pair.0.profile_id}}">
                         <input type="hidden" name="pk" value="{{survey.instance_id}}">
                     </form>
                     <!-- <table> -->
                         <!-- REMEMBER Create table to view station information -->
+                        {% for station in pair.1%}
                         <tr>
                             <td>{{station.station_number}}</td>
                             <td>{{station.distance}}</td>
