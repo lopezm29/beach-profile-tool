@@ -46,6 +46,7 @@
                             <input type="submit" value="Delete Profile" class="btn btn-danger">
                             <input type="hidden" name="pk" value="{{pair.0.profile_id}}">
                             <input type="hidden" name="next" value="{{ request.path }}">
+                            <input type="hidden" name="next_pk" value="{{survey.instance_id}}">
                             <input type="hidden" name="confirmed" value="False">
                         </form>
                     </div>
@@ -91,6 +92,7 @@
                                         <input type="submit" value="//delete//" class="btn btn-danger">
                                         <input type="hidden" name="pk" value="{{station.station_id}}">
                                         <input type="hidden" name="next" value="{{ request.path }}">
+                                        <input type="hidden" name="next_pk" value="{{survey.instance_id}}">
                                         <input type="hidden" name="confirmed" value="False">
                                     </form>
                                 </td>
