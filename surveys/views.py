@@ -64,7 +64,7 @@ def station(request, index=0):
         if form.is_valid():
             form.save(commit=False)
             form.profile = request.POST.get('profile_pk')
-            form.save()
+            form.save(commit=True)
             
             return survey_details(request)
         else:
