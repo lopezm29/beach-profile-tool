@@ -143,6 +143,7 @@ def profile_delete(request):
     pk = request.POST.get('pk')
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
+        profile = get_object_or_404(Profile, profile_id=profile_pk)
         profile.delete()
         
         return render(request, next_url, {'pk':pk})
@@ -161,6 +162,7 @@ def station_delete(request):
     pk = request.POST.get('next_pk')
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
+        station = get_object_or_404(Station, station_id=station_pk)
         station.delete()
         
         return render(request, next_url, {'pk':pk})
