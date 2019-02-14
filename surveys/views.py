@@ -119,12 +119,10 @@ def survey_details(request):
 #            stations.append(station_list)
 #            
 #    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
-
+#THIS NEEDS TO BE FIXED! SURVEY DELETE WOULD REROUTE TO INDEX NOT A SURVEY VIEW
 def survey_delete(request):
     survey_pk = request.POST.get('pk')
-    
     next_url = request.POST.get('next')
-    pk = request.POST.get('pk')
     
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         survey.delete()
@@ -147,14 +145,14 @@ def profile_delete(request):
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         profile.delete()
         
-        return render(request, next_url, {'pk':next_pk})
+        return render(request, next_url, {'pk':pk})
     
     elif "POST" == request.method and "False" == request.POST.get('confirmed'):
-        return render(request, next_url, {'pk':next_pk})
+        return render(request, next_url, {'pk':pk})
     
     profile = get_object_or_404(Profile, profile_id=profile_pk)
 
-    return render(request, 'surveys/profile_delete.html', {'profile':profile, 'pk':pk, 'next_url':next_url})
+    return render(request, 'surveys/profile_delete.html', {'profile':profile, 'profile_pk':profile_pk, 'pk':pk, 'next_url':next_url})
 
 def station_delete(request):
     station_pk = request.POST.get('station_pk')
@@ -165,16 +163,14 @@ def station_delete(request):
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         station.delete()
         
-        return render(request, next_url)
+        return render(request, next_url, {'pk':pk})
     
     elif "POST" == request.method and "False" == request.POST.get('confirmed'):
-        
-        
-        return render(request, next_url)
+        return render(request, next_url, {'pk':pk})
 
     station = get_object_or_404(Station, station_id=station_pk)
     
-    return render(request, 'surveys/station_delete.html', {'station':station, 'station_pk':station_pk, 'next_url':next_url})
+    return render(request, 'surveys/station_delete.html', {'station':station, 'station_pk':station_pk, 'pk':pk, 'next_url':next_url})
 
 def delete(request, confirmed_object):
     pk = request.POST.get('pk')
