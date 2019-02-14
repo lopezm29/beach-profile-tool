@@ -123,7 +123,7 @@ def survey_delete(request):
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         return delete(request, confirmed_object=survey)
     
-    return render(request, {'survey':survey, 'pk':survey.instance_id})
+    return render(request, 'surveys/survey_delete.html', {'survey':survey, 'pk':survey.instance_id})
 
 def profile_delete(request):
     profile = get_object_or_404(Profile, profile_id=request.POST.get('pk'))
@@ -132,7 +132,7 @@ def profile_delete(request):
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         return delete(request, confirmed_object=profile)
 
-    return render(request, {'profile':profile, 'pk':pk})
+    return render(request, 'surveys/profile_delete.html', {'profile':profile, 'pk':pk})
 
 def station_delete(request):
     station = get_object_or_404(Station, station_id=request.POST.get('pk'))
@@ -140,7 +140,7 @@ def station_delete(request):
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         return delete(request, confirmed_object=station)
 
-    return render(request, {'station':station, 'pk':station.station_id})
+    return render(request, 'surveys/station_delete.html', {'station':station, 'pk':station.station_id})
 
 def delete(request, confirmed_object):
     pk = request.POST.get('pk')
