@@ -105,7 +105,7 @@ def survey_details(request):
         pair.append(profile)
         pair.append(list_of_stations)
 
-    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair'})
+    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
 #   if request.POST['pk']:
 #        profiles = Profile.objects.filter(survey_instance=request.POST['pk'])
 #        #get_list_or_404(Profile, survey_instance=request.POST['pk'])
