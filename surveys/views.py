@@ -130,7 +130,7 @@ def survey_delete(request):
         next_pk = request.POST.get('next_pk')
         return render(request, next_url, {'pk':next_pk})
     
-    return render(request, 'surveys/survey_delete.html')
+    return render(request, 'surveys/survey_delete.html', {'survey':survey, 'pk':pk, 'next_url':next_url})
 
 def profile_delete(request):
     profile = get_object_or_404(Profile, profile_id=request.POST.get('pk'))
@@ -140,27 +140,30 @@ def profile_delete(request):
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         confirmed_object.delete()
+        
         return render(request, next_url, {'pk':next_pk})
     
     elif "POST" == request.method and "False" == request.POST.get('confirmed'):
         return render(request, next_url, {'pk':next_pk})
 
-    return render(request, 'surveys/profile_delete.html', {'profile':profile, 'pk':pk})
+    return render(request, 'surveys/profile_delete.html', {'profile':profile, 'pk':pk, 'next_url':next_url})
 
 def station_delete(request):
     station = get_object_or_404(Station, station_id=request.POST.get('pk'))
+    next_url = request.POST.get('next')
+        next_pk = request.POST.get('next_pk')
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         confirmed_object.delete()
-        next_url = request.POST.get('next')
-        next_pk = request.POST.get('next_pk')
+        
         return render(request, next_url, {'pk':next_pk})
+    
     elif "POST" == request.method and "False" == request.POST.get('confirmed'):
-        next_url = request.POST.get('next')
-        next_pk = request.POST.get('next_pk')
+        
+        
         return render(request, next_url, {'pk':next_pk})
 
-    return render(request, 'surveys/station_delete.html')
+    return render(request, 'surveys/station_delete.html', {'station':station, 'pk':pk, 'next_url':next_url})
 
 def delete(request, confirmed_object):
     pk = request.POST.get('pk')
