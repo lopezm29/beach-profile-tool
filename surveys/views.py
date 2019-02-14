@@ -146,9 +146,9 @@ def delete(request, confirmed_object):
     pk = request.POST.get('pk')
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
-        return delete(request, confirmed_object=station)
         confirmed_object.delete()
-        return redirect(request.POST.get('next'))
+        next_pk = request.POST.get('next_pk')
+        return render(request, request.POST.get('next'), {'pk':next_pk})
 
     return render(request, {'pk':pk})
 
