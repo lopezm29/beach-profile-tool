@@ -41,7 +41,7 @@
                     </div>
                     
                     <div class="row">
-                        <form method="POST" action="{% url 'profile_confirm' %}">
+                        <form method="POST" action="{% url 'profile_delete' %}">
                             {% csrf_token %}
                             <input type="submit" value="Delete Profile" class="btn btn-danger">
                             <input type="hidden" name="pk" value="{{pair.0.profile_id}}">
@@ -86,7 +86,7 @@
                                     </form>
                                 </td>
                                 <td class="border-left border-top">
-                                    <form method="POST" action="{% url 'station_confirm' %}">
+                                    <form method="POST" action="{% url 'station_delete' %}">
                                         {% csrf_token %}
                                         <input type="submit" value="//delete//" class="btn btn-danger">
                                         <input type="hidden" name="pk" value="{{station.station_id}}">
