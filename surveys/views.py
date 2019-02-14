@@ -152,7 +152,7 @@ def profile_delete(request):
     return render(request, 'surveys/profile_delete.html', {'profile':profile, 'pk':pk, 'next_url':next_url})
 
 def station_delete(request):
-    station_pk = request.POST.get('pk')
+    station_pk = request.POST.get('station_pk')
     station = get_object_or_404(Station, station_id=station_pk)
     
     next_url = request.POST.get('next')
