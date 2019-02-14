@@ -44,9 +44,9 @@
                         <form method="POST" action="{% url 'profile_delete' %}">
                             {% csrf_token %}
                             <input type="submit" value="Delete Profile" class="btn btn-danger">
-                            <input type="hidden" name="pk" value="{{pair.0.profile_id}}">
+                            <input type="hidden" name="profile_pk" value="{{pair.0.profile_id}}">
                             <input type="hidden" name="next" value="surveys/survey_details.html">
-                            <input type="hidden" name="next_pk" value="{{survey.instance_id}}">
+                            <input type="hidden" name="pk" value="{{survey.instance_id}}">
                             <input type="hidden" name="confirmed" value="">
                         </form>
                     </div>
@@ -90,9 +90,9 @@
                                     <form method="POST" action="{% url 'station_delete' %}">
                                         {% csrf_token %}
                                         <input type="submit" value="//delete//" class="btn btn-danger">
-                                        <input type="hidden" name="pk" value="{{station.station_id}}">
+                                        <input type="hidden" name="station_pk" value="{{station.station_id}}">
                                         <input type="hidden" name="next" value="surveys/survey_details.html">
-                                        <input type="hidden" name="next_pk" value="{{survey.instance_id}}">
+                                        <input type="hidden" name="pk" value="{{survey.instance_id}}">
                                         <input type="hidden" name="confirmed" value="">
                                     </form>
                                 </td>
