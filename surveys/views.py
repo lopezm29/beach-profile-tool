@@ -150,6 +150,7 @@ def profile_delete(request):
 
 def station_delete(request):
     station = get_object_or_404(Station, station_id=request.POST.get('pk'))
+    pk = station.station_id
     next_url = request.POST.get('next')
     next_pk = request.POST.get('next_pk')
 
