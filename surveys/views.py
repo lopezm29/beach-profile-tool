@@ -52,7 +52,7 @@ def profile(request):
 
 def station(request, index=0):
     form = StationCreate()
-    num_stations = int(request.POST.get('number_of_stations'))
+    # num_stations = int(request.POST.get('number_of_stations'))
     profile = Profile.objects.filter(profile_id=request.POST.get('profile_pk'))
     stations = Station.objects.filter(profile_id=request.POST.get('profile_pk'))
     
