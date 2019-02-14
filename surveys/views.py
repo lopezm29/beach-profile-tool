@@ -117,7 +117,7 @@ def survey_details(request):
 #            
 #    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
 
-def survey_confirm(request):
+def survey_delete(request):
     survey = get_object_or_404(Survey, instance_id=request.POST.get('pk'))
     
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
@@ -125,7 +125,7 @@ def survey_confirm(request):
     
     return render(request, {'survey':survey, 'pk':survey.instance_id})
 
-def profile_confirm(request):
+def profile_delete(request):
     profile = get_object_or_404(Profile, profile_id=request.POST.get('pk'))
     pk = profile.pk
 
@@ -134,7 +134,7 @@ def profile_confirm(request):
 
     return render(request, {'profile':profile, 'pk':pk})
 
-def station_confirm(request):
+def station_delete(request):
     station = get_object_or_404(Station, station_id=request.POST.get('pk'))
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
