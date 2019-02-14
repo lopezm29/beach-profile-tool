@@ -151,7 +151,7 @@ def profile_delete(request):
 def station_delete(request):
     station = get_object_or_404(Station, station_id=request.POST.get('pk'))
     next_url = request.POST.get('next')
-        next_pk = request.POST.get('next_pk')
+    next_pk = request.POST.get('next_pk')
 
     if "POST" == request.method and "True" == request.POST.get('confirmed'):
         confirmed_object.delete()
