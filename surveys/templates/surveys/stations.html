@@ -26,6 +26,7 @@
                     <div class="form-group">{{field.label_tag}} {{field}}</div>
                 {% endif %}
             {% endfor %}
+            <input type="hidden" name="pk" value="{{pk}}">
             <input type="submit" class="btn btn-primary" value="submit">
         </form>
     </div>
