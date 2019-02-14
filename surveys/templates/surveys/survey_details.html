@@ -10,7 +10,7 @@
                 </div>
                 <div class="row">
                     
-                    <p>Started: {{survey.start}}</p>
+                    <p>Started: <div class="date">{{survey.start}}</div></p>
                             
                 </div>
             </div>
@@ -21,23 +21,6 @@
                     <input type="submit" value="Add Profile" class="btn btn-primary"/>
                     <input type="hidden" name="pk" value="{{survey.instance_id}}">
                 </form>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-3">
-                <h3 class="text-primary"><u>Profiles</u>:</h3>
-            </div>
-            <div class="col-md-9">
-                <table>
-                    <tr>
-                        <th class="border-left">#</th>
-                        <th class="border-left">Distance</th>
-                        <th class="border-left">Elevation</th>
-                        <th class="border-left">#</th>
-                        <th class="border-left">#</th>
-                    </tr>
-                <!-- </table> -->
             </div>
         </div>
         
@@ -70,33 +53,46 @@
                 </div>
                 
                 <div class="col-md-9">
-                    <form  method="POST" action="{% url 'stations' %}">
-                        {% csrf_token %}
-                        <input type="submit" value="Add Station" class="btn btn-info"/>
-                        <input type="hidden" name="number_of_stations" value="0">
-                        <input type="hidden" name="profile_pk" value="{{pair.0.profile_id}}">
-                        <input type="hidden" name="pk" value="{{survey.instance_id}}">
-                    </form>
-                    <!-- <table> -->
-                        <!-- REMEMBER Create table to view station information -->
-                        {% for station in pair.1%}
-                        <tr>
-                            <td>{{station.station_number}}</td>
-                            <td>{{station.distance}}</td>
-                            <td>{{station.z}}</td>
-                            <td>
-                                <form method="POST">
-                                    <input type="submit" value="//edit//" class="btn btn-warning">
-                                </form>
-                            </td>
-                            <td>
-                                <form method="POST">
-                                    <input type="submit" value="//delete//" class="btn btn-warning">
-                                </form>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </table>
+                    <div class="row">
+                        <form  method="POST" action="{% url 'stations' %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Add Station" class="btn btn-info"/>
+                            <input type="hidden" name="number_of_stations" value="0">
+                            <input type="hidden" name="profile_pk" value="{{pair.0.profile_id}}">
+                            <input type="hidden" name="pk" value="{{survey.instance_id}}">
+                        </form>
+                    </div>
+                    <div class="row">
+                        <<table>
+                            <tr>
+                                <th class="border-left">#</th>
+                                <th class="border-left">Distance</th>
+                                <th class="border-left">Elevation</th>
+                                <th class="border-left">Comment</th>
+                                <th class="border-left">#</th>
+                                <th class="border-left">#</th>
+                            </tr>
+
+                            {% for station in pair.1%}
+                            <tr>
+                                <td>{{station.number}}</td>
+                                <td>{{station.distance}}</td>
+                                <td>{{station.z}}</td>
+                                <td>{{station.comment}}</td>
+                                <td>
+                                    <form method="POST">
+                                        <input type="submit" value="//edit//" class="btn btn-warning">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="POST">
+                                        <input type="submit" value="//delete//" class="btn btn-warning">
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>>
+                    </div>
                 </div>
                 
             </div>
