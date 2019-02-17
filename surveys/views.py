@@ -54,12 +54,10 @@ def profile(request):
         else:
             print('ERROR: Form invalid')
 
-    if any_profiles:
-        return render(request, 'surveys/profiles.html', {'form':form, 'pk':pk, 'profiles':profiles, 'profile_pk':latest_profile_pk})
-    else:
-        return render(request, 'surveys/profiles.html', {'form':form, 'pk':pk, 'profiles':profiles, 'profile_pk':latest_profile_pk})
+    return render(request, 'surveys/profiles.html', {'form':form, 'pk':pk, 'profiles':profiles, 'profile_pk':latest_profile_pk})
+    
 
-def station(request, index=0):
+def station(request):
     form = StationCreate()
     # num_stations = int(request.POST.get('number_of_stations'))
     pk = request.POST.get('pk')
@@ -67,7 +65,7 @@ def station(request, index=0):
     stations = Station.objects.filter(profile_id=request.POST.get('profile_pk'))
     
     if "POST" == request.method:
-        i = index
+        # i = index
         form = StationCreate(request.POST)
             
         if form.is_valid():
