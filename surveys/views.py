@@ -32,7 +32,7 @@ def profile(request):
     form = ProfileCreate()
     pk = request.POST.get('pk')
     profiles = Profile.objects.filter(survey_instance=pk)
-    # latest_profile_pk = profiles.order_by('-profile_id')[0].profile_id
+    latest_profile_pk = profiles.order_by('-profile_id')[0].profile_id
     #get_list_or_404(Survey, survey_instance_id=request.POST.get('pk'))
 
     if "POST" == request.method:
@@ -40,7 +40,7 @@ def profile(request):
 
         if form.is_valid():
             form.save(commit=True)
-            latest_profile_pk = profiles.order_by('-profile_id')[0].profile_id
+            #latest_profile_pk = profiles.order_by('-profile_id')[0].profile_id
             # profile = Profile.objects.order_by('profile_id')[0]
             # request.POST['profile_pk'] = profile.profile_id
 
