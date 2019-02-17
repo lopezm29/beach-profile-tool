@@ -39,6 +39,8 @@ def profile(request):
         any_profiles = True
         latest_profile_pk = profiles.order_by('-profile_id')[0].profile_id
     #get_list_or_404(Survey, survey_instance_id=request.POST.get('pk'))
+    else:
+        latest_profile_pk = int(profiles.order_by('-profile_id')[0].profile_id) + 1
 
     if "POST" == request.method:
         form = ProfileCreate(request.POST)
@@ -55,7 +57,7 @@ def profile(request):
     if any_profiles:
         return render(request, 'surveys/profiles.html', {'form':form, 'pk':pk, 'profiles':profiles, 'profile_pk':latest_profile_pk})
     else:
-        return render(request, 'surveys/profiles.html', {'form':form, 'pk':pk, 'profiles':profiles})
+        return render(request, 'surveys/profiles.html', {'form':form, 'pk':pk, 'profiles':profiles, 'profile_pk':latest_profile_pk})
 
 def station(request, index=0):
     form = StationCreate()
