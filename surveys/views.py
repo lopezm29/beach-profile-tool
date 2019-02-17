@@ -40,7 +40,7 @@ def profile(request):
         latest_profile_pk = profiles.order_by('-profile_id')[0].profile_id
     #get_list_or_404(Survey, survey_instance_id=request.POST.get('pk'))
     else:
-        latest_profile_pk = int(profiles.order_by('-profile_id')[0].profile_id) + 1
+        latest_profile_pk = 1
 
     if "POST" == request.method:
         form = ProfileCreate(request.POST)
