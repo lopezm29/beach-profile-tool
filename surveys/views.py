@@ -32,16 +32,22 @@ def survey(request):
 def profile(request):
     form = ProfileCreate()
     pk = request.POST.get('pk')
-    profiles = Profile.objects.filter(survey_instance=pk)
+    profiles = None
+    
     survey=None
-    if survey = get_object_or_404(Survey, instance_id=request.POST['pk']) 
-
+    
+    try survey = get_object_or_404(Survey, instance_id=pk):
+        pass
+    except:
+        survey = Survey.objects.order_by('-instance_id')[0]
+        
     any_profiles = False
-
+    profiles = Profile.objects.filter(survey_instance=survey)
+    
     if 0 < profiles.count():
         any_profiles = True
         latest_profile_pk = profiles.order_by('-profile_id')[0].profile_id
-    #get_list_or_404(Survey, survey_instance_id=request.POST.get('pk'))
+
     else:
         latest_profile_pk = 1
 
@@ -51,8 +57,7 @@ def profile(request):
         if form.is_valid():
             form.save(commit=True)
             latest_profile_pk = profiles.order_by('-profile_id')[0].profile_id
-            # profile = Profile.objects.order_by('profile_id')[0]
-            # request.POST['profile_pk'] = profile.profile_id
+
             return station(request)
         else:
             print('ERROR: Form invalid')
@@ -62,7 +67,7 @@ def profile(request):
 
 def station(request):
     form = StationCreate()
-    # num_stations = int(request.POST.get('number_of_stations'))
+
     pk = request.POST.get('pk')
     profile = Profile.objects.filter(profile_id=request.POST.get('profile_pk'))
     stations = Station.objects.filter(profile_id=request.POST.get('profile_pk'))
