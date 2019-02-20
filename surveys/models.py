@@ -17,7 +17,7 @@ class Profile(models.Model):
     profile_id = models.AutoField(primary_key=True)
     survey_instance = models.ForeignKey(Survey, blank=False, null=True, on_delete=models.PROTECT)
     section = models.CharField(max_length=3,blank=False)
-    number_of_stations = models.IntegerField()
+    #number_of_stations = models.IntegerField()
 
     elevation_control = models.DecimalField(decimal_places=3, max_digits=5, blank=True, null=True)
 
