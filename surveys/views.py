@@ -22,55 +22,67 @@ def survey(request):
 
         if form.is_valid():
             form.save(commit=True)
-            latest_survey_pk = surveys.order_by('-instance_id')[0].instance_id
-            return profile(request)
+
+            # meant to get newest survey's id
+            survey_pk = form.instance_id
+
+            profiles = Profile.objects.filter()
+            latest_profile_pk = Profile.objects.order_by('-profile_id')[0].profile_id + 1
+            profile_form = ProfileCreate()
+            return render(request, 'surveys/profiles.html', {'form':profile_form, 'pk':survey_pk, 'profiles':profiles, 'profile_pk':latest_profile_pk})
+            #return profile(request)
+
         else:
             print('ERROR: Form invalid')
 
     return render(request, 'surveys/surveys.html', {'form':form})
 
+def get_profiles(request, survey_pk):
+    profiles = Profile.objeccts.filter(survey_instance=survey_pk)
+    return profiles
+
 def profile(request):
     form = ProfileCreate()
     pk = request.POST.get('pk')
-    profiles = None
-    
-    survey=None
-    
-    try survey = get_object_or_404(Survey, instance_id=pk):
-        pass
-    except:
-        survey = Survey.objects.order_by('-instance_id')[0]
-        
-    any_profiles = False
-    profiles = Profile.objects.filter(survey_instance=survey)
-    
-    if 0 < profiles.count():
-        any_profiles = True
-        latest_profile_pk = profiles.order_by('-profile_id')[0].profile_id
 
-    else:
-        latest_profile_pk = 1
+    profiles = get_profiles(request, pk)
+    #Profile.objects.filter(survey_instance=pk)
+
 
     if "POST" == request.method:
         form = ProfileCreate(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
-            latest_profile_pk = profiles.order_by('-profile_id')[0].profile_id
 
-            return station(request)
+            # meant to get newest profile's pid
+            latest_profile_pk = form.profile_id
+            profile = get_object_or_404(Profile, profile_id=latest_profile_pk)
+            stations = get_station(latest_profile_pk)
+
+            # profile = Profile.objects.order_by('profile_id')[0]
+            # request.POST['profile_pk'] = profile.profile_id
+
+            station_form = StationCreate()
+            return render(request, 'surveys/stations.html', {'form':station_form, 'pk':pk, 'profile':profile, 'stations':stations})
+
         else:
             print('ERROR: Form invalid')
 
     return render(request, 'surveys/profiles.html', {'form':form, 'survey':survey, 'pk':pk, 'profiles':profiles, 'profile_pk':latest_profile_pk})
     
 
+def get_stations(profile_pk):
+    profile = Profile.objects.filter(profile_id=profile_pk)
+    stations = Station.objects.filter(profile_id=profile_pk)
+
+    return stations
+
 def station(request):
     form = StationCreate()
 
     pk = request.POST.get('pk')
-    profile = Profile.objects.filter(profile_id=request.POST.get('profile_pk'))
-    stations = Station.objects.filter(profile_id=request.POST.get('profile_pk'))
+    stations = get_stations(request, request.POST.get('profile_pk'))
     
     if "POST" == request.method:
         # i = index
@@ -80,14 +92,57 @@ def station(request):
             form.save(commit=False)
             form.profile = request.POST.get('profile_pk')
             form.save(commit=True)
-            
-            survey, profiles_stations_pair = get_survey_and_profiles_info(request)
-            
+
+            survey = get_object_or_404(Survey, instance_id=pk)
+            #COMPLETE THIS FUNCTION
+            profiles_stations_pair = get_profiles_stations_pair(pk)
             return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
+            #return survey_details(request)
+
         else:
             print('ERROR: Form invalid')
         
     return render(request, 'surveys/stations.html', {'form':form, 'pk':pk, 'profile':profile, 'stations':stations})
+
+
+def get_profiles_stations_pair(survey_pk):
+    profiles = Profile.objects.filter(survey_instance_id=survey_pk).order_by('section')
+
+    profiles_stations_pair = []
+
+    for profile in profiles:
+        pair = []
+        
+        list_of_stations = Station.objects.filter(profile_id=profile.profile_id).order_by('number')
+        
+        pair.append(profile)
+        pair.append(list_of_stations)
+        
+        profiles_stations_pair.append(pair)
+    
+    return survey, profiles_stations_pair
+
+def survey_details(request):
+    survey, profiles_stations_pair = get_profiles_stations_pair(request.POST.get('pk'))
+
+    return profiles_stations_pair
+
+def survey_details(request):
+    survey = get_object_or_404(Survey, instance_id=request.POST.get('pk'))
+    
+    profiles_stations_pair = get_profiles_stations_pair(survey_pk=request.POST.get('pk'))
+
+    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
+#   if request.POST['pk']:
+#        profiles = Profile.objects.filter(survey_instance=request.POST['pk'])
+#        #get_list_or_404(Profile, survey_instance=request.POST['pk'])
+#
+#        for profile in profiles:
+#            station_list = Station.objects.filter(profile_id=profile.profile_id)
+#            #get_list_or_404(Station, profile_id=profile.profile_id)
+#            stations.append(station_list)
+#            
+#    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
 
 def survey_edit(request):
     survey = get_object_or_404(Survey, instance_id=request.POST['pk'])
@@ -104,37 +159,6 @@ def survey_edit(request):
 
     return render(request, 'surveys/surveys.html', {'form':form})
 
-def get_survey_and_profiles_info(request):
-    survey = get_object_or_404(Survey, instance_id=request.POST.get('pk'))
-    profiles = Profile.objects.filter(survey_instance_id=request.POST.get('pk')).order_by('section')
-    profiles_stations_pair = []
-
-    for profile in profiles:
-        pair = []
-        
-        list_of_stations = Station.objects.filter(profile_id=profile.profile_id).order_by('number')
-        
-        pair.append(profile)
-        pair.append(list_of_stations)
-        
-        profiles_stations_pair.append(pair)
-    
-    return survey, profiles_stations_pair
-
-def survey_details(request):
-    survey, profiles_stations_pair = get_survey_and_profiles_info(request)
-
-    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
-#   if request.POST['pk']:
-#        profiles = Profile.objects.filter(survey_instance=request.POST['pk'])
-#        #get_list_or_404(Profile, survey_instance=request.POST['pk'])
-#
-#        for profile in profiles:
-#            station_list = Station.objects.filter(profile_id=profile.profile_id)
-#            #get_list_or_404(Station, profile_id=profile.profile_id)
-#            stations.append(station_list)
-#            
-#    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
 #THIS NEEDS TO BE FIXED! SURVEY DELETE WOULD REROUTE TO INDEX NOT A SURVEY VIEW
 def survey_delete(request):
     survey_pk = request.POST.get('pk')
