@@ -1,7 +1,7 @@
 def findIntercept(profile, stations, intercept_point):
     stations_found = False
     i = 0
-    while(!stations_found && i < stations.length-1):
+    while notstations_found and i < len(stations)-1:
         if(i == stations.length-1):
             i++
         else:
@@ -27,7 +27,7 @@ def calcBeachWidth(profile, stations, intercept_point):
 def calcBeachVolume(profile, stations, intercept_point)
     pult_index, mllw = findIntercept(profile=profile, stations=stations, intercept_point=intercept_point)
     volume = 0
-    for i in range(stations.length-1):
+    for i in range(len(stations)-1):
         if(i == pult_index):
             left = station[i].true_elevation - intercept_point
             distance = mllw - station[i].true_distance
