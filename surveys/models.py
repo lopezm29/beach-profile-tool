@@ -33,8 +33,8 @@ class Station(models.Model):
     distance = models.DecimalField(decimal_places=3, max_digits=6, blank=False, null=True)
     z = models.DecimalField(decimal_places=3, max_digits=6, blank=False, null=True)
 
-    true_distance = models.DecimalField(decimal_places=3, max_digits=6, blank=True, null=True, default=0)
-    true_elevation = models.DecimalField(decimal_places=3, max_digits=6, blank=True, null=True, default=0)
+    # true_distance = models.DecimalField(decimal_places=3, max_digits=6, blank=True, null=True, default=0)
+    # true_elevation = models.DecimalField(decimal_places=3, max_digits=6, blank=True, null=True, default=0)
 
     comment = models.CharField(max_length=200, blank=True, null=True)
 
