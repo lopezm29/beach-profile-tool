@@ -57,8 +57,7 @@ def get_next_profile_pk():
 def profile(request):
     form = ProfileCreate()
     pk = request.POST.get('pk')
-
-    survey = get_object_or_404(Survey, instance_id=pk)
+    
     profiles = Profile.objects.filter(survey_instance=pk)
     latest_profile_pk = get_next_profile_pk()
     #Profile.objects.filter(survey_instance=pk)
@@ -83,6 +82,8 @@ def profile(request):
         else:
             print('ERROR: Form invalid')
 
+    survey = get_object_or_404(Survey, instance_id=pk)
+            
     return render(request, 'surveys/profiles.html', {'form':form, 'survey':survey, 'pk':pk, 'profiles':profiles, 'profile_pk':latest_profile_pk})
     
 
@@ -95,7 +96,6 @@ def station(request):
     form = StationCreate()
 
     pk = request.POST.get('pk')
-    profile = get_object_or_404(Profile, profile_id=request.POST.get('profile_pk'))
     stations = get_stations(request.POST.get('profile_pk'))
     
     if "POST" == request.method:
@@ -114,7 +114,9 @@ def station(request):
 
         else:
             print('ERROR: Form invalid')
-        
+    
+    profile = get_object_or_404(Profile, profile_id=request.POST.get('profile_pk'))
+    
     return render(request, 'surveys/stations.html', {'form':form, 'pk':pk, 'profile':profile, 'stations':stations})
 
 
