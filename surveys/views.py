@@ -58,7 +58,7 @@ def profile(request):
     form = ProfileCreate()
     pk = request.POST.get('pk')
 
-    latest_profile_pk = 
+    latest_profile_pk = get_next_profile_id(survey_pk=pk)
     #Profile.objects.filter(survey_instance=pk)
     
     if "POST" == request.method:
