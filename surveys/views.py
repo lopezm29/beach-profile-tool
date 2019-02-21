@@ -67,10 +67,10 @@ def profile(request):
         form = ProfileCreate(request.POST)
 
         if form.is_valid():
-            form.save(commit=True)
+            profile_object = form.save(commit=True)
 
             # meant to get newest profile's pid
-            latest_profile_pk = form.profile_id
+            latest_profile_pk = profile_object.profile_id
             profile = get_object_or_404(Profile, profile_id=latest_profile_pk)
             stations = get_stations(latest_profile_pk)
 
