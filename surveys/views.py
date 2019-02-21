@@ -23,13 +23,17 @@ def survey(request):
         if form.is_valid():
             survey_object = form.save(commit=True)
 
+            profiles_stations_pair = get_profiles_stations_pair(survey_object.instance_id)
+            
+            return render(request, 'surveys/survey_details.html', {'survey':survey_object, 'profiles_stations_pair':profiles_stations_pair})
             # meant to get newest survey's id
-            survey_pk = survey_object.instance_id
-            profiles = Profile.objects.filter(survey_instance=survey_pk)
-            next_profile_pk = get_next_profile_pk()
-
-            profile_form = ProfileCreate()
-            return render(request, 'surveys/profiles.html', {'form':profile_form, 'pk':survey_pk, 'profiles':profiles, 'profile_pk':next_profile_pk})
+#            survey_pk = survey_object.instance_id
+#            profiles = Profile.objects.filter(survey_instance=survey_pk)
+#            next_profile_pk = get_next_profile_pk()
+#
+#            profile_form = ProfileCreate()
+#            
+#            return render(request, 'surveys/profiles.html', {'form':profile_form, 'pk':survey_pk, 'profiles':profiles, 'profile_pk':next_profile_pk})
             #return profile(request)
 
         else:
