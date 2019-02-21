@@ -26,7 +26,7 @@ def survey(request):
             # meant to get newest survey's id
             survey_pk = survey_object.instance_id
 
-            next_profile_pk = get_next_profile_pk(survey_pk=survey_pk)
+            next_profile_pk = get_next_profile_pk()
 
             profile_form = ProfileCreate()
             return render(request, 'surveys/profiles.html', {'form':profile_form, 'pk':survey_pk, 'profiles':profiles, 'profile_pk':next_profile_pk})
