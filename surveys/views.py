@@ -25,7 +25,7 @@ def survey(request):
 
             # meant to get newest survey's id
             survey_pk = survey_object.instance_id
-
+            profiles = Profile.objects.filter(survey_instance=survey_pk)
             next_profile_pk = get_next_profile_pk()
 
             profile_form = ProfileCreate()
