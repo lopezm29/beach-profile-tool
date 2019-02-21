@@ -60,8 +60,7 @@ def profile(request):
 
     latest_profile_pk = 
     #Profile.objects.filter(survey_instance=pk)
-
-
+    
     if "POST" == request.method:
         form = ProfileCreate(request.POST)
 
