@@ -21,10 +21,12 @@ def survey(request):
         form = SurveyCreate(request.POST)
 
         if form.is_valid():
-            form.save(commit=True)
+            form.save(commit=False)
 
             # meant to get newest survey's id
             survey_pk = form.instance_id
+
+            form.save(commit=True)
 
             profiles = Profile.objects.filter()
             latest_profile_pk = Profile.objects.order_by('-profile_id')[0].profile_id + 1
