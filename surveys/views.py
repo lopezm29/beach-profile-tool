@@ -95,6 +95,7 @@ def station(request):
     form = StationCreate()
 
     pk = request.POST.get('pk')
+    profile = get_object_or_404(Profile, profile_id=request.POST.get('profile_pk'))
     stations = get_stations(request.POST.get('profile_pk'))
     
     if "POST" == request.method:
