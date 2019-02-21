@@ -96,7 +96,7 @@ def station(request):
     form = StationCreate()
 
     pk = request.POST.get('pk')
-    stations = get_stations(request.POST.get('profile_pk'))
+    stations = get_stations(request.POST.get('profile_pk')).order_by('number')
     
     if "POST" == request.method:
         # i = index
