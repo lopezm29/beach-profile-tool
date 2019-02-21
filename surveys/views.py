@@ -58,7 +58,7 @@ def profile(request):
             # meant to get newest profile's pid
             latest_profile_pk = form.profile_id
             profile = get_object_or_404(Profile, profile_id=latest_profile_pk)
-            stations = get_station(latest_profile_pk)
+            stations = get_stations(latest_profile_pk)
 
             # profile = Profile.objects.order_by('profile_id')[0]
             # request.POST['profile_pk'] = profile.profile_id
@@ -73,7 +73,6 @@ def profile(request):
     
 
 def get_stations(profile_pk):
-    profile = Profile.objects.filter(profile_id=profile_pk)
     stations = Station.objects.filter(profile_id=profile_pk)
 
     return stations
@@ -82,7 +81,7 @@ def station(request):
     form = StationCreate()
 
     pk = request.POST.get('pk')
-    stations = get_stations(request, request.POST.get('profile_pk'))
+    stations = get_stations(request.POST.get('profile_pk'))
     
     if "POST" == request.method:
         # i = index
@@ -93,9 +92,8 @@ def station(request):
             form.profile = request.POST.get('profile_pk')
             form.save(commit=True)
 
-            survey = get_object_or_404(Survey, instance_id=pk)
             #COMPLETE THIS FUNCTION
-            profiles_stations_pair = get_profiles_stations_pair(pk)
+            survey, profiles_stations_pair = get_profiles_stations_pair(pk)
             return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
             #return survey_details(request)
 
