@@ -23,9 +23,9 @@ def survey(request):
         if form.is_valid():
             survey_object = form.save(commit=True)
 
-            profiles_stations_pair = get_profiles_stations_pair(survey_object.instance_id)
+            survey, profiles_stations_pair = get_profiles_stations_pair(survey_object.instance_id)
             
-            return render(request, 'surveys/survey_details.html', {'survey':survey_object, 'profiles_stations_pair':profiles_stations_pair})
+            return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
             # meant to get newest survey's id
 #            survey_pk = survey_object.instance_id
 #            profiles = Profile.objects.filter(survey_instance=survey_pk)
