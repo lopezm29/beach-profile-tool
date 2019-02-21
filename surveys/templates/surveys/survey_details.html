@@ -55,14 +55,6 @@
                 
                 <div class="col-md-9">
                     <div class="row">
-                        <form  method="POST" action="{% url 'stations' %}">
-                            {% csrf_token %}
-                            <input type="submit" value="Add Station" class="btn btn-info"/>
-                            <input type="hidden" name="profile_pk" value="{{pair.0.profile_id}}">
-                            <input type="hidden" name="pk" value="{{survey.instance_id}}">
-                        </form>
-                    </div>
-                    <div class="row">
                         <table>
                             <tr>
                                 <th class="border-left border-top">#</th>
@@ -98,6 +90,14 @@
                             </tr>
                             {% endfor %}
                         </table>
+                    </div>
+                    <div class="row">
+                        <form  method="POST" action="{% url 'stations' %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Add Station" class="btn btn-info"/>
+                            <input type="hidden" name="profile_pk" value="{{pair.0.profile_id}}">
+                            <input type="hidden" name="pk" value="{{survey.instance_id}}">
+                        </form>
                     </div>
                 </div>
                 
