@@ -41,9 +41,9 @@ def survey(request):
 
     return render(request, 'surveys/surveys.html', {'form':form})
 
-def get_profiles(request, survey_pk):
-    profiles_list = Profile.objects.filter(survey_instance=survey_pk)
-    return profiles_list
+#def get_profiles(request, survey_pk):
+#    profiles_list = Profile.objects.filter(survey_instance=survey_pk)
+#    return profiles_list
 
 def get_next_profile_pk():
     all_profiles = Profile.objects
