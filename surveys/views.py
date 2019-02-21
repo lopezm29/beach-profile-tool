@@ -54,6 +54,7 @@ def profile(request):
     pk = request.POST.get('pk')
 
     profiles = get_profiles(request, pk)
+    latest_profile_pk = profiles.order_by('-profile_id')[0].profile_id + 1
     #Profile.objects.filter(survey_instance=pk)
 
 
