@@ -106,6 +106,7 @@ def station(request):
 
 
 def get_profiles_stations_pair(survey_pk):
+    survey = get_object_or_404(Survey, instance_id=survey_pk)
     profiles = Profile.objects.filter(survey_instance_id=survey_pk).order_by('section')
 
     profiles_stations_pair = []
@@ -125,14 +126,7 @@ def get_profiles_stations_pair(survey_pk):
 def survey_details(request):
     survey, profiles_stations_pair = get_profiles_stations_pair(request.POST.get('pk'))
 
-    return profiles_stations_pair
-
-# def survey_details(request):
-#     survey = get_object_or_404(Survey, instance_id=request.POST.get('pk'))
-    
-#     profiles_stations_pair = get_profiles_stations_pair(survey_pk=request.POST.get('pk'))
-
-#     return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
+    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
 #   if request.POST['pk']:
 #        profiles = Profile.objects.filter(survey_instance=request.POST['pk'])
 #        #get_list_or_404(Profile, survey_instance=request.POST['pk'])
