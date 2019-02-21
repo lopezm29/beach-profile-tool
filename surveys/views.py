@@ -26,15 +26,7 @@ def survey(request):
             # meant to get newest survey's id
             survey_pk = survey_object.instance_id
 
-            all_profiles = Profile.objects
-            surveys_profiles = all_profiles.filter(survey_instance=survey_pk)
-
-            if 0 < all_profiles.count() and 0 < surveys_profiles.count():
-                next_profile_pk = surveys_profiles.order_by('-profile_id')[0].profile_id
-            elif 0 < all_profiles.count():
-                next_profile_pk = all_profiles.order_by('-profile_id')[0].profile_id + 1
-            else:
-                next_profile_pk = 1
+            next_profile_pk = get_next_profile_pk(survey_pk=survey_pk)
 
             profile_form = ProfileCreate()
             return render(request, 'surveys/profiles.html', {'form':profile_form, 'pk':survey_pk, 'profiles':profiles, 'profile_pk':next_profile_pk})
@@ -49,12 +41,24 @@ def get_profiles(request, survey_pk):
     profiles = Profile.objects.filter(survey_instance=survey_pk)
     return profiles
 
+def get_next_profile_id(survey_pk):
+    all_profiles = Profile.objects
+    surveys_profiles = all_profiles.filter(survey_instance=survey_pk)
+    
+    if 0 < all_profiles.count() and 0 < surveys_profiles.count():
+        next_profile_pk = surveys_profiles.order_by('-profile_id')[0].profile_id
+    elif 0 < all_profiles.count():
+        next_profile_pk = all_profiles.order_by('-profile_id')[0].profile_id + 1
+    else:
+        next_profile_pk = 1
+    
+    return next_profile_id
+
 def profile(request):
     form = ProfileCreate()
     pk = request.POST.get('pk')
 
-    profiles = get_profiles(request, pk)
-    latest_profile_pk = profiles.order_by('-profile_id')[0].profile_id + 1
+    latest_profile_pk = 
     #Profile.objects.filter(survey_instance=pk)
 
 
