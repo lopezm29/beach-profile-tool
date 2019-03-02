@@ -189,7 +189,7 @@ def profile_edit(request):
     return render(request, 'surveys/profiles_edit.html', {'form':form})
 
 def station_edit(request):
-    station = get_object_or_404(Station, station_id=request.POST.get('station_id'))
+    station = get_object_or_404(Station, station_id=request.POST.get('station_pk'))
     
     if "POST" == request.method:
         form = ProfileCreate(request.POST, instance=survey)
