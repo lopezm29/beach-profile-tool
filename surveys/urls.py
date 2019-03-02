@@ -13,12 +13,8 @@ urlpatterns=[
     path('surveys/profile_delete', views.profile_delete, name='profile_delete'),
     path('surveys/station_delete', views.station_delete, name='station_delete'),
     path('surveys/delete', views.delete, name='delete'),
-    #path('stations/', StationView.as_view()), #Edit View
-    #path('stations/add', StationCreate.as_view()), #Form Made
-    #path('stations/edit', StationUpdate.as_view()),
-    #path('profiles/add', ProfileCreate.as_view()), #Form Made
-    #path('profiles/edit', ProfileUpdate.as_view()), 
-    #path('surveys/add', SurveyCreate.as_view()), #Form Made
-    #path('surveys/edit', SurveyUpdate.as_view()),
+    path('surveys/surveys_edit', views.surveys_edit, name='surveys_edit'),
+    path('surveys/profiles_edit', views.profiles_edit, name='profiles_edit'),
+    path('surveys/stations_edit', views.stations_edit, name='stations_edit'),
     path('', views.index, name='index') #Create an index?
 ]

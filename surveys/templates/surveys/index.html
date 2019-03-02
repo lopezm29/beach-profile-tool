@@ -8,6 +8,7 @@
                 <th class="border-left">Start Date</th>
                 <th class="border-left"></th>
                 <th class="border-left"></th>
+                <th class="border-left"></th>
             </tr>
         </div>
         {% for survey in surveys%}
@@ -27,6 +28,15 @@
                         <input type="submit" value="View Details" class="btn btn-success"/>
                         <input type="hidden" name="pk" value="{{survey.instance_id}}">
                     </form> 
+                </td>
+                <td class="border-left">
+                    <form method="POST" action="{% url 'surveys_edit' %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Edit" class="btn btn-warning">
+                        <input type="hidden" name="survey_pk" value="{{survey.instance_id}}">
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <input type="hidden" name="confirmed" value="False">
+                    </form>
                 </td>
                 <td class="border-left">
                     <form method="POST" action="{% url 'survey_delete' %}">
