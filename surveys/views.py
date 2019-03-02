@@ -26,6 +26,8 @@ def survey(request):
             survey, profiles_stations_pair = get_profiles_stations_pair(survey_object.instance_id)
             
             return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
+        else:
+            print('ERROR: Form invalid')
             # meant to get newest survey's id
 #            survey_pk = survey_object.instance_id
 #            profiles = Profile.objects.filter(survey_instance=survey_pk)
@@ -154,7 +156,7 @@ def survey_details(request):
 #    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
 
 def survey_edit(request):
-    survey = get_object_or_404(Survey, instance_id=request.POST['pk'])
+    survey, profiles_stations_pair = get_profiles_stations_pair(request.POST.get('survey_pk'))
 
     if "POST" == request.method:
         form = SurveyCreate(request.POST, instance=survey)
@@ -162,11 +164,47 @@ def survey_edit(request):
         if form.is_valid():
             survey = form.save(commit=False)
             survey.save()
-            return redirect('survey_detail')
+            return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
         else:
             print('ERROR: Form invalid')
 
-    return render(request, 'surveys/surveys.html', {'form':form})
+    return render(request, 'surveys/surveys_edit.html', {'form':form})
+
+def profile_edit(request):
+    profile = get_object_or_404(Profile, profile_id=request.POST.get('profile_pk'))
+    
+    if "POST" == request.method:
+        form = ProfileCreate(request.POST, instance=survey)
+
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.save()
+
+            survey, profiles_stations_pair = get_profiles_stations_pair(request.POST.get('survey_pk'))
+
+            return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
+        else:
+            print('ERROR: Form invalid')
+
+    return render(request, 'surveys/profiles_edit.html', {'form':form})
+
+def station_edit(request):
+    station = get_object_or_404(Station, station_id=request.POST.get('station_id'))
+    
+    if "POST" == request.method:
+        form = ProfileCreate(request.POST, instance=survey)
+
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.save()
+
+            survey, profiles_stations_pair = get_profiles_stations_pair(request.POST.get('survey_pk'))
+
+            return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles_stations_pair':profiles_stations_pair})
+        else:
+            print('ERROR: Form invalid')
+
+    return render(request, 'surveys/stations_edit.html', {'form':form})
 
 #THIS NEEDS TO BE FIXED! SURVEY DELETE WOULD REROUTE TO INDEX NOT A SURVEY VIEW
 def survey_delete(request):
@@ -242,5 +280,3 @@ def profileStationsEdit(request, stations):
 
     return render(request, 'surveys/profile_stations_edit.html', {'forms':forms})
 
-def station_edit(request, profile_id):
-    pass
