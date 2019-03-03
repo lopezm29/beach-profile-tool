@@ -38,9 +38,6 @@ def survey(request):
 #            return render(request, 'surveys/profiles.html', {'form':profile_form, 'pk':survey_pk, 'profiles':profiles, 'profile_pk':next_profile_pk})
             #return profile(request)
 
-        else:
-            print('ERROR: Form invalid')
-
     return render(request, 'surveys/surveys.html', {'form':form})
 
 #def get_profiles(request, survey_pk):
