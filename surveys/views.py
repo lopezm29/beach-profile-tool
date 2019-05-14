@@ -187,7 +187,7 @@ def profiles_edit(request):
 
 def stations_edit(request):
     station = get_object_or_404(Station, station_id=request.POST.get('station_pk'))
-    
+    return render(request, 'surveys/stations_edit.html', {'form':station})
     if "POST" == request.method:
         form = ProfileCreate(request.POST, instance=station)
 
