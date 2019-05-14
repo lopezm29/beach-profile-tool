@@ -201,7 +201,7 @@ def stations_edit(request):
         else:
             print('ERROR: Form invalid')
 
-    return render(request, 'surveys/stations_edit.html', {'form':form, 'station':station})
+    return render(request, 'surveys/stations_edit.html', {'form':form})
 
 #THIS NEEDS TO BE FIXED! SURVEY DELETE WOULD REROUTE TO INDEX NOT A SURVEY VIEW
 def survey_delete(request):
