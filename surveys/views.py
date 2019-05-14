@@ -156,7 +156,7 @@ def surveys_edit(request):
     survey, profiles_stations_pair = get_profiles_stations_pair(request.POST.get('survey_pk'))
 
     if "POST" == request.method:
-        form = SurveyCreate(request.POST, instance=survey)
+        form = SurveyCreate(instance=survey)
 
         if form.is_valid():
             survey = form.save(commit=False)
@@ -171,7 +171,7 @@ def profiles_edit(request):
     profile = get_object_or_404(Profile, profile_id=request.POST.get('profile_pk'))
     
     if "POST" == request.method:
-        form = ProfileCreate(request.POST, instance=survey)
+        form = ProfileCreate(instance=survey)
 
         if form.is_valid():
             profile = form.save(commit=False)
@@ -189,7 +189,7 @@ def stations_edit(request):
     station = get_object_or_404(Station, station_id=request.POST.get('station_pk'))
     
     if "POST" == request.method:
-        form = ProfileCreate(request.POST, instance=station)
+        form = ProfileCreate(instance=station)
 
         if form.is_valid():
             profile = form.save(commit=False)
