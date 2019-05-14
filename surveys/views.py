@@ -152,7 +152,7 @@ def survey_details(request):
 #            
 #    return render(request, 'surveys/survey_details.html', {'survey':survey, 'profiles':profiles, 'stations':stations})
 
-def survey_edit(request):
+def surveys_edit(request):
     survey, profiles_stations_pair = get_profiles_stations_pair(request.POST.get('survey_pk'))
 
     if "POST" == request.method:
@@ -167,7 +167,7 @@ def survey_edit(request):
 
     return render(request, 'surveys/surveys_edit.html', {'form':form})
 
-def profile_edit(request):
+def profiles_edit(request):
     profile = get_object_or_404(Profile, profile_id=request.POST.get('profile_pk'))
     
     if "POST" == request.method:
@@ -185,7 +185,7 @@ def profile_edit(request):
 
     return render(request, 'surveys/profiles_edit.html', {'form':form})
 
-def station_edit(request):
+def stations_edit(request):
     station = get_object_or_404(Station, station_id=request.POST.get('station_pk'))
     
     if "POST" == request.method:
