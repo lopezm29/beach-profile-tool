@@ -34,8 +34,8 @@
                     <div class="row">
                         <form method="POST" action="{% url 'profiles_edit' %}">
                             {% csrf_token %}
-                            <input type="hidden" name="survey_pk" value="pair.0.survey_instance">
-                            <input type="hidden" name="profile_pk" value="pair.0.profile_id">
+                            <input type="hidden" name="survey_pk" value="{{pair.0.survey_instance}}">
+                            <input type="hidden" name="profile_pk" value="{{pair.0.profile_id}}">
                             <input type="submit" value="Edit Profile" class="btn btn-warning">
                         </form>
                     </div>
@@ -74,8 +74,8 @@
                                 <td class="border-left border-top">
                                     <form method="POST" action="{url 'stations_edit'}">
                                         {% csrf_token %}
-                                        <input type="hidden" name="station_pk" value="station.station_id">
-                                        <input type="hidden" name="survey_pk" value="station.profile.survey_instance">
+                                        <input type="hidden" name="station_pk" value="{{station.station_id}}">
+                                        <input type="hidden" name="survey_pk" value="{{station.profile.survey_instance}}">
                                         <input type="submit" value="//edit//" class="btn btn-warning">
                                     </form>
                                 </td>
