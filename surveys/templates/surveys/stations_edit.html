@@ -10,8 +10,8 @@
     <div class="row">
         <form method="POST" action="{% url 'stations' %}">
             {% csrf_token %}
-            {% for field_f, field_s in form, station %}
-                <div class="form-group">{{field_f.label_tag}} {{field_f = field_s}}</div>
+            {% for field in form%}
+                <div class="form-group">{{field.label_tag}} {{field}}</div>
             {% endfor %}
             <input type="hidden" name="survey_pk" value="{{station.profile.survey_instance.instance_id}}">
             <input type="hidden" name="station_pk" value="{{station.station_id}}"
